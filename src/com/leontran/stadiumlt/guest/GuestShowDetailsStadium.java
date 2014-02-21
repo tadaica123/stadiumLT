@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +32,8 @@ public class GuestShowDetailsStadium extends Activity {
 	
 	private TextView txtTitle;
 
-	private Button btnBack;
-	private Button btnEdit;
+	private LinearLayout btnBack;
+	private LinearLayout btnEdit;
 	private Button btnServiceMore;
 	
 //	private ImageView imgLogo;
@@ -55,8 +56,8 @@ public class GuestShowDetailsStadium extends Activity {
 		
 		txtTitle = (TextView) findViewById(R.id.txt_title);
 
-		btnBack = (Button) findViewById(R.id.btn_left);
-		btnEdit = (Button) findViewById(R.id.btn_right);
+		btnBack = (LinearLayout) findViewById(R.id.layout_button_left);
+		btnEdit = (LinearLayout) findViewById(R.id.layout_button_right);
 		btnServiceMore = (Button) findViewById(R.id.btn_other_service);
 		
 //		imgLogo = (ImageView) findViewById(R.id.imgLogo);
@@ -84,6 +85,14 @@ public class GuestShowDetailsStadium extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Toast.makeText(GuestShowDetailsStadium.this, "Coming Soon!", Toast.LENGTH_SHORT).show();
+			}
+		});
+		btnEdit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 	}

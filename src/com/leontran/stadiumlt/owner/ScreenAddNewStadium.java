@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,8 +42,8 @@ public class ScreenAddNewStadium extends Activity {
 
 	private TextView txtTitle;
 
-	private Button btnBack;
-	private Button btnEdit;
+	private LinearLayout btnBack;
+	private LinearLayout btnEdit;
 	private Button btnServiceMore;
 
 	private RelativeLayout layout_district;
@@ -66,13 +67,11 @@ public class ScreenAddNewStadium extends Activity {
 
 		layout_district = (RelativeLayout) findViewById(R.id.layout_district);
 
-		btnBack = (Button) findViewById(R.id.btn_left);
-		btnEdit = (Button) findViewById(R.id.btn_right);
+		btnBack = (LinearLayout) findViewById(R.id.layout_button_left);
+		btnEdit = (LinearLayout) findViewById(R.id.layout_button_right);
 		btnServiceMore = (Button) findViewById(R.id.btn_other_service);
 
 		dialog = new CustomProgressDialog(ScreenAddNewStadium.this);
-
-		btnEdit.setVisibility(View.GONE);
 		txtTitle.setText("New Stadium ");
 	}
 

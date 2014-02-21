@@ -39,9 +39,10 @@ public class SlideMenuFragment extends ListFragment {
 			parseXml(R.menu.slide_left);
 		}
 		
-		ArrayList<String> district = new ArrayList<String>();
+		ArrayList<SlideMenuItem> district = new ArrayList<SlideMenuItem>();
 		for (int i = 0; i < menuItemList.size(); i++) {
-			district.add(menuItemList.get(i).label);
+			district.add(menuItemList.get(i));
+			
 		}
 		ListViewAdapterMainMenu colorAdapter = new ListViewAdapterMainMenu(
 				getActivity(), district);
@@ -92,17 +93,17 @@ public class SlideMenuFragment extends ListFragment {
 						String textId = xpp.getAttributeValue(
 								"http://schemas.android.com/apk/res/android",
 								"title");
-						// String iconId = xpp.getAttributeValue(
-						// "http://schemas.android.com/apk/res/android",
-						// "icon");
+						 String iconId = xpp.getAttributeValue(
+						 "http://schemas.android.com/apk/res/android",
+						 "icon");
 						String resId = xpp.getAttributeValue(
 								"http://schemas.android.com/apk/res/android",
 								"id");
 
 						SlideMenuItem item = new SlideMenuItem();
 						item.id = Integer.valueOf(resId.replace("@", ""));
-						// item.icon = getActivity().getResources().getDrawable(
-						// Integer.valueOf(iconId.replace("@", "")));
+						 item.icon = getActivity().getResources().getDrawable(
+						 Integer.valueOf(iconId.replace("@", "")));
 						item.label = resourceIdToString(textId);
 
 						menuItemList.add(item);

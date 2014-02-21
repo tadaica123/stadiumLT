@@ -49,10 +49,10 @@
     <color name="navigation_bar_color">#528A31</color>
     <color name="text_color_1">#34495E</color>
     <color name="text_color_2">#5F9EA0</color>
-   
-	 <color name="back_ground_hoover">#2C3E50</color>
+    <color name="green_light">#5ACCB5</color>
+    <color name="back_ground_hoover">#2C3E50</color>
     <color name="back_ground">#34495E</color>
     <color name="back_ground_button_1">#1ABC9C</color>
-    
-    
+    <color name="list_item_blue_2">#4385F4</color>
+
 </resources>

@@ -22,20 +22,23 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/layout_right"
+                android:layout_toLeftOf="@+id/layout_button_right"
                 android:gravity="center_vertical|right" >
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:gravity="center_vertical|left"
+                    android:id="@+id/layout_button_left"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_style3"
+                    android:gravity="center"
                     android:maxWidth="130dp" >
 
                     <Button
                         android:id="@+id/btn_left"
-                        android:layout_width="@dimen/btn_width_home"
-                        android:layout_height="@dimen/btn_height_team"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/menu_white"
+                        android:clickable="false"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -48,23 +51,24 @@
                     android:gravity="center"
                     android:singleLine="true"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_right"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/layout_button_right"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:gravity="center_vertical|right" >
+                android:background="@drawable/button_style3"
+                android:gravity="center" >
 
                 <Button
                     android:id="@+id/btn_right"
-                    android:layout_width="@dimen/btn_width_home"
-                    android:layout_height="@dimen/btn_height_team"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/white_filter"
+                    android:clickable="false"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />

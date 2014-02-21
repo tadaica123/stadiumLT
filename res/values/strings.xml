@@ -70,4 +70,6 @@
 	<string name="morning">Sáng 6h - 14h </string>
 	<string name="afternoon">Chiều 14h - 18h </string>
 	<string name="evening">Tối 18h - 23h </string>
+	
+	<string name="done">Lưu </string>
 </resources>

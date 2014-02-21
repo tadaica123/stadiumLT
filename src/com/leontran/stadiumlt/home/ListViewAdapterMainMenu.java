@@ -11,12 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leontran.stadiumlt.R;
+import com.leontran.stadiumlt.model.SlideMenuItem;
 
-public class ListViewAdapterMainMenu extends ArrayAdapter<String> {
+public class ListViewAdapterMainMenu extends ArrayAdapter<SlideMenuItem> {
 
 	private LayoutInflater inflator;
 
-	public ListViewAdapterMainMenu(Activity context, List<String> list) {
+	public ListViewAdapterMainMenu(Activity context, List<SlideMenuItem> list) {
 		super(context, R.layout.row, R.id.row_title, list);
 		inflator = context.getLayoutInflater();
 	}
@@ -27,7 +28,7 @@ public class ListViewAdapterMainMenu extends ArrayAdapter<String> {
 
 		TextView districtName;
 		ImageView districtLogo = null;
-		String pos = this.getItem(position);
+		SlideMenuItem pos = this.getItem(position);
 		// ViewHolder viewHolder = null;
 		if (convertView == null) {
 
@@ -45,8 +46,8 @@ public class ListViewAdapterMainMenu extends ArrayAdapter<String> {
 		}
 		districtName.setTag(pos);
 		districtLogo.setTag(pos);
-		districtName.setText(pos);
-
+		districtName.setText(pos.label);
+		districtLogo.setImageDrawable(pos.icon);
 		return convertView;
 	}
 

@@ -14,7 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -52,8 +52,8 @@ public class ScreenMainActivity extends BaseActivity {
 	private ArrayList<StadiumDetailModel> listStadiumData;
 
 	private TextView tvTitle;
-	private Button btnLeft;
-	private Button btnRight;
+	private LinearLayout btnLeft;
+	private LinearLayout btnRight;
 
 	private int checkshow = 0;
 
@@ -63,8 +63,8 @@ public class ScreenMainActivity extends BaseActivity {
 		listviewMain = (RefreshableListView) findViewById(R.id.listview);
 
 		tvTitle = (TextView) findViewById(R.id.txt_title);
-		btnLeft = (Button) findViewById(R.id.btn_left);
-		btnRight = (Button) findViewById(R.id.btn_right);
+		btnLeft = (LinearLayout) findViewById(R.id.layout_button_left);
+		btnRight = (LinearLayout) findViewById(R.id.layout_button_right);
 
 		dialog = new CustomProgressDialog(ScreenMainActivity.this);
 	}

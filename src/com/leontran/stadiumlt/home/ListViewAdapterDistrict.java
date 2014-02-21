@@ -48,7 +48,6 @@ public class ListViewAdapterDistrict extends ArrayAdapter<String>  {
 		districtName.setTag(pos);
 		districtLogo.setTag(pos);
 		districtName.setText(pos);
-		districtLogo.setVisibility(View.GONE);
 
 		return convertView;
 	}

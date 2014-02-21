@@ -56,6 +56,7 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -182,6 +183,23 @@ public class Services {
 
 	}
 	
+	public static HttpResponse doPut(String url, String json)
+			throws ClientProtocolException, IOException {
+		// HttpClient httpclient = new DefaultHttpClient();
+
+		HttpClient httpclient = getNewHttpClient();
+
+		HttpPut httpput = new HttpPut(url);
+		// setProxy(defaultHttpClient);
+		StringEntity string = new StringEntity(json, "UTF-8");
+		string.setContentType("application/json");
+		httpput.setEntity(string);
+		HttpResponse response;
+		response = httpclient.execute(httpput);
+		return response;
+
+	}
+	
 	
 
 	public static HttpResponse doRemove(String url)
@@ -189,11 +207,11 @@ public class Services {
 
 		HttpClient httpclient = getNewHttpClient();
 
-		HttpPost httppost = new HttpPost(url);
+		HttpDelete httpdelete = new HttpDelete(url);
 		// setProxy(defaultHttpClient);
 		HttpResponse response;
 
-		response = httpclient.execute(httppost);
+		response = httpclient.execute(httpdelete);
 
 		return response;
 	}

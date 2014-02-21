@@ -7,10 +7,7 @@
     android:layout_marginTop="10dp"
     android:background="@color/transparent"
     android:cacheColorHint="@color/transparent"
-    android:divider="@color/transparent"
-    android:dividerHeight="5dp"
-    android:paddingBottom="5dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
+    android:divider="@drawable/divider_line_menu"
+    android:dividerHeight="1.5dp"
     android:scrollbars="none" />
  
