@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="75.0dip"
+    android:background="@null"
+    android:clickable="false"
+    android:focusable="false" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70.0dip"
+        android:layout_marginBottom="6dp"
+        android:clickable="false"
+        android:focusable="false" >
+
+        <TextView
+            android:id="@+id/refresh_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15.0dip"
+            android:gravity="center"
+            android:paddingLeft="@dimen/standard_spacing"
+            android:shadowColor="@color/solid_white"
+            android:shadowDy="1.0"
+            android:shadowRadius="0.5"
+            android:text="@string/refresh_pull_down"
+            android:textColor="#4682B4"
+            android:textSize="@dimen/font_size_default"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/update_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/refresh_text"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:paddingLeft="@dimen/standard_spacing"
+            android:shadowColor="@color/solid_white"
+            android:shadowDy="1.0"
+            android:shadowRadius="0.5"
+            android:textColor="#4682B4"
+            android:textSize="@dimen/font_size_default"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/refresh_loading"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25.0dip"
+            android:indeterminateDrawable="@drawable/rotate_process"
+            android:scaleType="center"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/refresh_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25.0dip"
+            android:contentDescription="@null"
+            android:scaleType="center"
+            android:src="@drawable/ic_pull_arrow" />
+
+        <View
+            android:id="@+id/refresh_divider"
+            android:layout_width="fill_parent"
+            android:layout_height="10.0dip"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/standard_spacing"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="6.0dip"
+        android:layout_alignParentBottom="true"
+        android:background="@null" >
+    </LinearLayout>
+
+</RelativeLayout>

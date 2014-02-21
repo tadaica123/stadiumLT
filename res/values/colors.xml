@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="gray">#888888</color>
+    <color name="green_fly">#3498DB</color>
+    <color name="green_fly_hv">#2980B9</color>
+    <color name="green1">#006400</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_gray">#D7D7DE</color>
+    <color name="blue_text">#4779B4</color>
+    <color name="blue_header">#515B70</color>
+    <color name="black">#000000</color>
+    <color name="blue">#0000FF</color>
+    <color name="blue_ray">#5F9EA0</color>
+    <color name="light_blue_2">#43BEEC</color>
+    <color name="green">#4F7D1E</color>
+    <color name="green_text">#1A5F19</color>
+    <color name="red">#FF0000</color>
+    <color name="darkgrey">#303030</color>
+    <color name="lightblack">#404040</color>
+    <color name="darkorange">#F88017</color>
+    <color name="orange">#FF9900</color>
+    <color name="line">#b6da69</color>
+    <color name="line1">#0F0F0F</color>
+    <color name="pink">#FFF8DC</color>
+    <color name="transparent">#00000000</color>
+    <color name="solid_white">#ffffffff</color>
+    <color name="secondary_text">#ff999999</color>
+    <color name="list_item">#d6eaae</color>
+    <color name="list_item_blue">#2ECC71</color>
+    <color name="list_item_file">#595A5B</color>
+    <color name="list_item_search">#e6edf0</color>
+    <color name="list_item_search_hoover">#15C4F4</color>
+    <color name="white_button">#ECF0F1</color>
+    <color name="white_button_hoover">#BDC3C7</color>
+    <color name="backgroud_pull">#e0e0e0</color>
+    <color name="app_background">#ffffff</color>
+    <color name="light_blue">#331ed7</color>
+    <color name="dark_blue">#1b09a0</color>
+    <color name="brow">#544ec3</color>
+    <color name="text_tab_selected">#5d5d5d</color>
+    <color name="text_tab_unselected">#838183</color>
+    <color name="media_controller_text_color">#FFFFFF</color>
+    <color name="media_controller_bg_color">#5f5f5f</color>
+    <color name="seekbar_bg">#141414</color>
+    <color name="seekbar_progress">#a53130</color>
+    <color name="seekbar_sec_progress">#875e5e</color>
+    <color name="button_color">#4EA30D</color>
+    <color name="navigation_bar_color">#528A31</color>
+    <color name="text_color_1">#34495E</color>
+    <color name="text_color_2">#5F9EA0</color>
+   
+	 <color name="back_ground_hoover">#2C3E50</color>
+    <color name="back_ground">#34495E</color>
+    <color name="back_ground_button_1">#1ABC9C</color>
+    
+    
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/add_new"
+        
+        android:title="@string/add_new">
+    </item>
+    <item
+        android:id="@+id/my_stadium"
+        android:title="@string/my_stadium">
+    </item>
+        <item
+        android:id="@+id/all_stadium"
+        android:title="@string/all_stadium">
+    </item>
+    <item
+        android:id="@+id/sign_out"
+        android:title="@string/sign_out">
+    </item>
+
+</menu>

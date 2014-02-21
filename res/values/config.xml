@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="Server_Login">/login</string>
+    <string name="Server_Get_All_Data">/stadiumLT</string>
+    <string name="Server_Get_Owner_Data">/stadiumOwner</string>
+</resources>

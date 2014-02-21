@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">StadiumLT</string>
+    <string name="title">STADIUM HCM</string>
+    <string name="action_settings">Cài Đặt</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="login_as">ĐĂNG NHẬP DẠNG</string>
+    <string name="login">Đăng Nhập</string>
+    <string name="guest">Khách Hàng </string>
+    <string name="stadium_owner">Quản Lý Sân</string>
+    <string name="enter_username">Điền Vào Tên Đăng Nhập</string>
+    <string name="password">Mật Khẩu</string>
+    <string name="refresh_pull_down">Kéo xuống để làm mới trang…</string>
+    <string name="refresh_release">Buông ra để làm mới…</string>
+    <string name="loading">Updating…</string>
+    <string name="loading_2">Loading…</string>
+    <string name="img_des">This is a image View</string>
+
+    <!-- string for sliding menu -->
+    <string name="anim_zoom">Zoom</string>
+    <string name="anim_scale">Scale</string>
+    <string name="anim_fold">Fold</string>
+    <string name="anim_slide">Slide Up</string>
+    <string name="changing_fragments">Changing Fragments</string>
+    <string name="animations">Custom Animations</string>
+
+    <string name="all">Tất Cả</string>
+    <string name="quan1">Quận 1</string>
+    <string name="quan2">Quận 2</string>
+    <string name="quan3">Quận 3</string>
+    <string name="quan4">Quận 4</string>
+    <string name="quan5">Quận 5</string>
+    <string name="quan6">Quận 6</string>
+    <string name="quan7">Quận 7</string>
+    <string name="quan8">Quận 8</string>
+    <string name="quan9">Quận 9</string>
+    <string name="quan10">Quận 10</string>
+    <string name="quan11">Quận 11</string>
+    <string name="quan12">Quận 12</string>
+    <string name="quan_govap">Quận Gò Vấp</string>
+    <string name="quan_tanbinh">Quận Tân Bình</string>
+    <string name="quan_tanphu">Quận Tân Phú</string>
+    <string name="quan_binhthanh">Quận Bình Thạnh</string>
+    <string name="quan_phunhuan">Quận Phú Nhuận</string>
+    <string name="quan_thuduc">Quận Thủ Đức</string>
+    <string name="quan_binhtan">Quận Bình Tân</string>
+    
+    <string name="add_new">Thêm Mới</string>
+    <string name="general_information">Thông Tin Chung</string>
+    <string name="my_stadium">Sân Của Tôi</string>
+    <string name="all_stadium">Sân Của Hệ Thống</string>
+    <string name="sign_out">Thoát</string>
+    
+    <string name="name">Tên Sân </string>
+	<string name="address">Địa Chỉ </string>
+	<string name="district">Quận </string>
+	<string name="email">Email </string>
+	<string name="phone">Số Điện Thoại </string>
+	<string name="number_stadium">Số Sân </string>
+	<string name="price">Giá cả </string>
+	<string name="five_number">Sân 5 Người </string>
+	<string name="seven_number">Sân 7 Người </string>
+	<string name="description">Mô tả </string>
+	<string name="service_other">Các Dịch Vụ Khác </string>
+	
+	<string name="select_district">CHỌN QUẬN </string>
+	<string name="zero">0 </string>
+	
+	<string name="morning">Sáng 6h - 14h </string>
+	<string name="afternoon">Chiều 14h - 18h </string>
+	<string name="evening">Tối 18h - 23h </string>
+</resources>

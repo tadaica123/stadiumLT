@@ -1,0 +1,36 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">10dp</dimen>
+    <dimen name="activity_vertical_margin">10dp</dimen>
+    <dimen name="border_width">0.5dp</dimen>
+    <dimen name="border_offset">-0.5dp</dimen>
+    <dimen name="actionbar_height">48dip</dimen>
+    <dimen name="actionbar_item_height">48dip</dimen>
+    <dimen name="actionbar_item_width">48dip</dimen>
+    <dimen name="standard_spacing">5.0dip</dimen>
+    <dimen name="font_size_default">13.0sp</dimen>
+    <dimen name="font_size_title_header">20sp</dimen>
+    <dimen name="font_size_normal_text">16sp</dimen>
+    <dimen name="btn_width_back_school">50dp</dimen>
+    <dimen name="btn_height_home_banner">50dp</dimen>
+    <dimen name="btn_width_team">50dp</dimen>
+    <dimen name="btn_height_team">30dp</dimen>
+    <dimen name="btn_height_nomal">30dp</dimen>
+    <dimen name="btn_width_nomal">62dp</dimen>
+    <dimen name="btn_width_home">40dp</dimen>
+    <dimen name="btn_widht_back">90dp</dimen>
+    <dimen name="icon_schedule_width">55dp</dimen>
+    <dimen name="icon_schedule_height">55dp</dimen>
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">5dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">3dp</dimen>
+    <dimen name="height_toolbar_normal">50dp</dimen>
+    <dimen name="width_divide">0.5dp</dimen>
+    <dimen name="slidingmenu_offset">60dp</dimen>
+    <dimen name="list_padding">10dp</dimen>
+    <dimen name="shadow_width">15dp</dimen>
+
+</resources>
