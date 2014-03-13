@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layout_background" >
+
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/layout_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/header_bar_3" />
+    </LinearLayout>
+
+    <!--
+     	<com.google.android.maps.MapView
+	    android:id="@+id/mapview"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_below="@+id/header_layout"
+	    android:layout_marginBottom="50dp"
+	    android:layout_marginRight="0dp"
+	    android:apiKey="@string/map_key"
+	    android:clickable="true" />
+    -->
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header_layout"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="0dp"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:clickable="true" />
+
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal" >
+
+        <Button 
+            android:id="@+id/btn_standard"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:background="@drawable/btn_pending"
+            android:text="@string/standard"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_satellite"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:background="@drawable/btn_today_off"
+            android:text="@string/satellite"
+            android:textColor="@color/gray_2" />
+
+        <Button
+            android:id="@+id/btn_hybrid"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:background="@drawable/btn_month_off"
+            android:text="@string/hybrid"
+            android:textColor="@color/gray_2" />
+    </LinearLayout>
+
+</RelativeLayout>
