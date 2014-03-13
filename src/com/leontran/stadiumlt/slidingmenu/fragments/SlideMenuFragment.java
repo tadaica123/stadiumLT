@@ -34,7 +34,7 @@ public class SlideMenuFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 		app = (CustomApplication) getActivity().getApplication();
 		if (app.getTyleLogin() ==0){
-			parseXml(R.menu.slide_left_guest);
+			parseXml(R.menu.slide_left);
 		} else {
 			parseXml(R.menu.slide_left);
 		}

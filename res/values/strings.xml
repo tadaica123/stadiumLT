@@ -24,7 +24,6 @@
     <string name="anim_slide">Slide Up</string>
     <string name="changing_fragments">Changing Fragments</string>
     <string name="animations">Custom Animations</string>
-
     <string name="all">Tất Cả</string>
     <string name="quan1">Quận 1</string>
     <string name="quan2">Quận 2</string>
@@ -45,31 +44,39 @@
     <string name="quan_phunhuan">Quận Phú Nhuận</string>
     <string name="quan_thuduc">Quận Thủ Đức</string>
     <string name="quan_binhtan">Quận Bình Tân</string>
-    
     <string name="add_new">Thêm Mới</string>
     <string name="general_information">Thông Tin Chung</string>
     <string name="my_stadium">Sân Của Tôi</string>
     <string name="all_stadium">Sân Của Hệ Thống</string>
     <string name="sign_out">Thoát</string>
-    
     <string name="name">Tên Sân </string>
-	<string name="address">Địa Chỉ </string>
-	<string name="district">Quận </string>
-	<string name="email">Email </string>
-	<string name="phone">Số Điện Thoại </string>
-	<string name="number_stadium">Số Sân </string>
-	<string name="price">Giá cả </string>
-	<string name="five_number">Sân 5 Người </string>
-	<string name="seven_number">Sân 7 Người </string>
-	<string name="description">Mô tả </string>
-	<string name="service_other">Các Dịch Vụ Khác </string>
-	
-	<string name="select_district">CHỌN QUẬN </string>
-	<string name="zero">0 </string>
-	
-	<string name="morning">Sáng 6h - 14h </string>
-	<string name="afternoon">Chiều 14h - 18h </string>
-	<string name="evening">Tối 18h - 23h </string>
-	
-	<string name="done">Lưu </string>
+    <string name="address">Địa Chỉ </string>
+    <string name="district">Quận </string>
+    <string name="email">Email </string>
+    <string name="phone">Số Điện Thoại </string>
+    <string name="number_stadium">Số Sân </string>
+    <string name="price">Giá cả </string>
+    <string name="five_number">Sân 5 Người </string>
+    <string name="seven_number">Sân 7 Người </string>
+    <string name="description">Mô tả </string>
+    <string name="service_other">Định Vị </string>
+    <string name="select_district">CHỌN QUẬN </string>
+    <string name="zero">0 </string>
+    <string name="morning">Sáng 6h - 14h </string>
+    <string name="afternoon">Chiều 14h - 18h </string>
+    <string name="evening">Tối 18h - 23h </string>
+    <string name="done">Lưu </string>
+    <string name="navigate">Thêm </string>
+
+    <!-- ========================= balloon_overlay.xml ================================= -->
+    <string name="balloon_item_title">balloon_item_title</string>
+    <string name="balloon_item_snippet">balloon_item_snippet</string>
+
+    <!-- Ta =============screen_show_map.xml========================================== -->
+    <string name="navigate">Navigate</string>
+    <string name="standard">Standard</string>
+    <string name="satellite">Satellite</string>
+    <string name="traffic">Traffic</string>
+    <string name="hybrid">Hybrid</string>
+
 </resources>

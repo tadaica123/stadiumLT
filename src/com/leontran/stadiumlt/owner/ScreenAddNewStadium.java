@@ -1,10 +1,17 @@
 package com.leontran.stadiumlt.owner;
 
-import android.app.Activity;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -13,9 +20,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.leontran.stadiumlt.CustomApplication;
 import com.leontran.stadiumlt.CustomProgressDialog;
 import com.leontran.stadiumlt.R;
@@ -25,9 +43,11 @@ import com.leontran.stadiumlt.model.StadiumDetailModel;
 import com.leontran.stadiumlt.model.StadiumNumberModel;
 import com.leontran.stadiumlt.network.Services;
 import com.leontran.stadiumlt.ultilities.CustomListViewDialog;
+import com.leontran.stadiumlt.ultilities.Global;
 import com.leontran.stadiumlt.ultilities.Ultilities;
 
-public class ScreenAddNewStadium extends Activity {
+public class ScreenAddNewStadium extends FragmentActivity implements
+		OnMapClickListener, OnMapLongClickListener, OnCameraChangeListener {
 
 	private CustomApplication app;
 
@@ -44,9 +64,17 @@ public class ScreenAddNewStadium extends Activity {
 
 	private LinearLayout btnBack;
 	private LinearLayout btnEdit;
+
+	ScrollView mainScrolView;
+
+	private GoogleMap mMap;
+
+	private List<Marker> listmarker;
+
 	private Button btnServiceMore;
 
 	private RelativeLayout layout_district;
+	private RelativeLayout layout_map;
 
 	StadiumDetailModel dataPost;
 
@@ -66,11 +94,16 @@ public class ScreenAddNewStadium extends Activity {
 		txtTitle = (TextView) findViewById(R.id.txt_title);
 
 		layout_district = (RelativeLayout) findViewById(R.id.layout_district);
+		layout_map = (RelativeLayout) findViewById(R.id.ll_mapview);
 
 		btnBack = (LinearLayout) findViewById(R.id.layout_button_left);
 		btnEdit = (LinearLayout) findViewById(R.id.layout_button_right);
+		mainScrolView = (ScrollView) findViewById(R.id.main_layout);
+
 		btnServiceMore = (Button) findViewById(R.id.btn_other_service);
 
+		listmarker = new ArrayList<Marker>();
+		
 		dialog = new CustomProgressDialog(ScreenAddNewStadium.this);
 		txtTitle.setText("New Stadium ");
 	}
@@ -82,9 +115,16 @@ public class ScreenAddNewStadium extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				finish();
-				overridePendingTransition(R.anim.slide_right,
-						R.anim.slide_left_leave);
+				if (mainScrolView.getVisibility() == View.GONE) {
+					mainScrolView.setVisibility(View.VISIBLE);
+					btnEdit.setVisibility(View.VISIBLE);
+					layout_map.setVisibility(View.GONE);
+				} else {
+					finish();
+					overridePendingTransition(R.anim.slide_right,
+							R.anim.slide_left_leave);
+				}
+
 			}
 		});
 		btnServiceMore.setOnClickListener(new OnClickListener() {
@@ -92,8 +132,9 @@ public class ScreenAddNewStadium extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(ScreenAddNewStadium.this, "Coming Soon!",
-						Toast.LENGTH_SHORT).show();
+				mainScrolView.setVisibility(View.GONE);
+				btnEdit.setVisibility(View.GONE);
+				layout_map.setVisibility(View.VISIBLE);
 			}
 		});
 		layout_district.setOnClickListener(new OnClickListener() {
@@ -220,6 +261,100 @@ public class ScreenAddNewStadium extends Activity {
 			}
 			dialog.dismiss();
 		}
+	}
+
+	private void setUpMapIfNeeded() {
+		if (mMap == null) {
+			mMap = ((SupportMapFragment) getSupportFragmentManager()
+					.findFragmentById(R.id.map)).getMap();
+			if (mMap != null) {
+				setUpMap();
+			}
+		}
+	}  
+
+	private void setUpMap() {
+		mMap.setOnMapClickListener(this);
+		mMap.setOnMapLongClickListener(this);
+		mMap.setOnCameraChangeListener(this);
+	}
+
+	@Override
+	public void onMapClick(LatLng p) {
+		// mTapTextView.setText("tapped, point=" + point);
+		listmarker.clear();
+		mMap.clear();
+		try {
+			Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+
+			List<Address> addresses = geoCoder.getFromLocation(p.latitude,
+					p.longitude, 1);
+			Log.d("lat neeeeeee", "" + p.latitude);
+			Log.d("lng neeeeeee", "" + p.longitude);
+			Global.lat = String.valueOf(p.latitude);
+			Global.lng = String.valueOf(p.longitude);
+
+			String add = "";
+			if (addresses.size() > 0) {
+
+				for (int i = 0; i < addresses.get(0).getMaxAddressLineIndex(); i++)
+
+					add += addresses.get(0).getAddressLine(i) + " ";
+				Toast.makeText(ScreenAddNewStadium.this, add,
+						Toast.LENGTH_SHORT).show();
+			}
+			Marker marker = mMap.addMarker(new MarkerOptions().position(p)
+					.icon(BitmapDescriptorFactory
+							.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+			listmarker.add(marker);
+			if (add.contains(",")) {
+				String[] state = add.split(",");
+				String getState = state[1];
+				String getAdd = state[0];
+
+				getState = getState.trim();
+				if (getState.contains(" ")) {
+					String[] getZip = getState.split(" ");
+					Global.zipcode = getZip[1];
+					Global.state = getZip[0];
+				}
+				getAdd = getAdd.trim();
+				if (getAdd.contains(" ")) {
+					String[] getAddress = getAdd.split(" ");
+					int lenghtOfArray = getAddress.length;
+					String city = getAddress[lenghtOfArray - 1];
+					String address = "";
+					if (lenghtOfArray > 1) {
+						for (int i = 0; i < (lenghtOfArray - 1); i++) {
+							address += getAddress[i] + " ";
+						}
+					}
+
+					Global.city = city;
+					Global.street = address;
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void onMapLongClick(LatLng point) {
+		// mTapTextView.setText("long pressed, point=" + point);
+	}
+
+	@Override
+	public void onCameraChange(final CameraPosition position) {
+		// mCameraTextView.setText(position.toString());
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setUpMapIfNeeded();
 	}
 
 }

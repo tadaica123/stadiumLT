@@ -16,7 +16,26 @@
         <include layout="@layout/header_bar_2" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/ll_mapview"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/layout_background"
+        android:visibility="gone" >
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.SupportMapFragment" />
+    </RelativeLayout>
+
     <ScrollView
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -87,10 +106,10 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
                         android:layout_toRightOf="@+id/title_name"
+                        android:background="@color/transparent"
                         android:gravity="right"
                         android:inputType="textCapSentences"
                         android:singleLine="true"
-                        android:background="@color/transparent"
                         android:textColor="@color/text_color_2"
                         android:textSize="16sp" >
                     </EditText>
@@ -130,11 +149,11 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
                         android:layout_toRightOf="@+id/title_address"
+                        android:background="@color/transparent"
                         android:ems="10"
                         android:gravity="right"
                         android:inputType="text"
                         android:singleLine="true"
-                        android:background="@color/transparent"
                         android:textColor="@color/text_color_2"
                         android:textSize="16sp" >
                     </EditText>
@@ -173,8 +192,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@+id/title_district"
                         android:layout_toLeftOf="@+id/img_select_district"
+                        android:layout_toRightOf="@+id/title_district"
                         android:ems="10"
                         android:gravity="right"
                         android:singleLine="true"
@@ -191,7 +210,6 @@
                         android:layout_marginRight="5dp"
                         android:contentDescription="@string/img_des"
                         android:src="@drawable/gender_ic" />
-
                 </RelativeLayout>
 
                 <LinearLayout
@@ -228,11 +246,11 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
                         android:layout_toRightOf="@+id/title_email"
+                        android:background="@color/transparent"
                         android:ems="10"
                         android:gravity="right"
                         android:inputType="textEmailAddress"
                         android:singleLine="true"
-                        android:background="@color/transparent"
                         android:textColor="@color/text_color_2"
                         android:textSize="16sp" >
                     </EditText>
@@ -272,11 +290,11 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
                         android:layout_toRightOf="@+id/title_phone"
+                        android:background="@color/transparent"
                         android:ems="10"
                         android:gravity="right"
                         android:inputType="phone"
                         android:singleLine="true"
-                        android:background="@color/transparent"
                         android:textColor="@color/text_color_2"
                         android:textSize="16sp" >
                     </EditText>
@@ -334,10 +352,10 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:gravity="center"
                                 android:ems="10"
-           						android:text="@string/zero"
-                                android:inputType="number" >
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:text="@string/zero" >
                             </EditText>
                         </LinearLayout>
 
@@ -358,10 +376,10 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="@string/zero"
                                 android:ems="10"
-                                android:inputType="number" />
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:text="@string/zero" />
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
@@ -392,10 +410,10 @@
                     android:id="@+id/txt_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="80dp"
-                    android:inputType="textMultiLine"
-                    android:textColor="@color/text_color_2"
                     android:background="@color/transparent"
+                    android:inputType="textMultiLine"
+                    android:minHeight="80dp"
+                    android:textColor="@color/text_color_2"
                     android:textSize="16sp" />
             </LinearLayout>
 

@@ -16,6 +16,22 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <permission
+        android:name="com.example.mapdemo.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="com.example.mapdemo.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="CONTROL_LOCATION_UPDATES" />
+    <!-- Maps API needs OpenGL ES 2.0. -->
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <application
         android:name="com.leontran.stadiumlt.CustomApplication"
         android:allowBackup="false"
@@ -41,11 +57,15 @@
             android:name=".guest.GuestShowDetailsStadium"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-         <activity
+        <activity
             android:name=".owner.ScreenAddNewStadium"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        
+         <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAGwkys0sI_0Ta7yPtAoO8uEbk9tEu_Myk" />
+        
     </application>
-
 
 </manifest>

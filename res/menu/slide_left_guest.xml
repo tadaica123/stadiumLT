@@ -3,6 +3,7 @@
 
     <item
         android:id="@+id/sign_out"
+        android:icon="@drawable/lognout_48x48"
         android:title="@string/sign_out">
     </item>
 

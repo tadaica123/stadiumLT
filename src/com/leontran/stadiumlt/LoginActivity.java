@@ -84,7 +84,6 @@ public class LoginActivity extends Activity implements OnClickListener {
 					edtUserName.setAlpha((float) 0.5);
 					edtPassword.setAlpha((float) 0.5);
 				}
-
 			}
 		});
 
@@ -169,37 +168,37 @@ public class LoginActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.btn_login:
 			setDomainServer();
-//			if (radGuest.isChecked()) {
-//				dialog.show();
-//				app.setTyleLogin(0);
-//				Handler handle = new Handler();
-//				handle.postDelayed(new Runnable() {
-//					@Override
-//					public void run() {
-//						// TODO Auto-generated method stub
-//						try {
-//							Intent intent = new Intent(LoginActivity.this,
-//									ScreenMainActivity.class);
-//							startActivity(intent);
-//							overridePendingTransition(R.anim.slide_left,
-//									R.anim.slide_right_leave);
-//						} catch (Exception ex) {
-//						}
-//						dialog.dismiss();
-//					}
-//				}, 2020);
-//
-//			} else if (radOwner.isChecked()) {
-//				app.setTyleLogin(1);
-//				SignInTheServer signIn = new SignInTheServer();
-//				signIn.execute("");
-//			}
-			app.setTyleLogin(1);
-			Intent intent = new Intent(LoginActivity.this,
-					ScreenMainActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_left,
-					R.anim.slide_right_leave);
+			if (radGuest.isChecked()) {
+				dialog.show();
+				app.setTyleLogin(0);
+				Handler handle = new Handler();
+				handle.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						try {
+							Intent intent = new Intent(LoginActivity.this,
+									ScreenMainActivity.class);
+							startActivity(intent);
+							overridePendingTransition(R.anim.slide_left,
+									R.anim.slide_right_leave);
+						} catch (Exception ex) {
+						}
+						dialog.dismiss();
+					}
+				}, 2020);
+
+			} else if (radOwner.isChecked()) {
+				app.setTyleLogin(1);
+				SignInTheServer signIn = new SignInTheServer();
+				signIn.execute("");
+			}
+//			app.setTyleLogin(1);
+//			Intent intent = new Intent(LoginActivity.this,
+//					ScreenMainActivity.class);
+//			startActivity(intent);
+//			overridePendingTransition(R.anim.slide_left,
+//					R.anim.slide_right_leave);
 			break;
 		}
 
