@@ -32,6 +32,9 @@ public class GetStadiumDetailGson extends ArrayList<GetTypeStadiumGson> {
 
 		@SerializedName("ownerId")
 		public String ownerId;
+		
+		@SerializedName("map")
+		public GetTypeMap map;
 
 		@SerializedName("district")
 		public GetDistrictGson district;
@@ -41,6 +44,15 @@ public class GetStadiumDetailGson extends ArrayList<GetTypeStadiumGson> {
 		
 		@SerializedName("price")
 		public GetPriceGson price;
+	}
+	
+	public class GetTypeMap {
+		
+		@SerializedName("lat")
+		public String lat;
+		
+		@SerializedName("long")
+		public String lng;
 	}
 
 	
@@ -70,5 +82,7 @@ public class GetStadiumDetailGson extends ArrayList<GetTypeStadiumGson> {
 		@SerializedName("evening")
 		public String evening;
 	}
+	
+
 
 }

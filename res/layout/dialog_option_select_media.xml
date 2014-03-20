@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/layout_alpha_05"
+    android:gravity="bottom"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/layout_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="1"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingTop="10dp" >
+
+        <Button
+            android:id="@+id/btn_take_photo"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_style5"
+            android:text="@string/take_a_photo"
+            android:textColor="@color/white"
+            android:textSize="16sp" >
+        </Button>
+
+        <Button
+            android:id="@+id/btn_from_gallery"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_style5"
+            android:text="@string/from_gallery"
+            android:textColor="@color/white"
+            android:textSize="16sp" >
+        </Button>
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_style6"
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            android:textSize="16sp" >
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>

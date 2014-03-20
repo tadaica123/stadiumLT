@@ -1,6 +1,7 @@
 package com.leontran.stadiumlt.guest;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -8,11 +9,14 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.leontran.stadiumlt.CustomApplication;
 import com.leontran.stadiumlt.R;
+import com.leontran.stadiumlt.home.ScreenMainActivity;
+import com.leontran.stadiumlt.map.ScreenShowMapView;
+import com.leontran.stadiumlt.model.Map;
 import com.leontran.stadiumlt.model.StadiumDetailModel;
+import com.leontran.stadiumlt.owner.ScreenEditStadium;
 
 public class GuestShowDetailsStadium extends Activity {
 
@@ -75,7 +79,8 @@ public class GuestShowDetailsStadium extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				finish();
+				Intent itent = new Intent(GuestShowDetailsStadium.this , ScreenMainActivity.class);
+				startActivity(itent);
 				overridePendingTransition(R.anim.slide_right, R.anim.slide_left_leave);
 			}
 		});
@@ -84,7 +89,12 @@ public class GuestShowDetailsStadium extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(GuestShowDetailsStadium.this, "Coming Soon!", Toast.LENGTH_SHORT).show();
+				Map map = new Map(app.getStadiumDetails().getMap().getLat(), app.getStadiumDetails().getMap().getLng());
+				app.setMap(map);
+				app.setVenueAddress(app.getStadiumDetails().getAddress());
+				Intent itent = new Intent(GuestShowDetailsStadium.this , ScreenShowMapView.class);
+				startActivity(itent);
+				overridePendingTransition(R.anim.slide_left, R.anim.slide_right_leave);
 			}
 		});
 		btnEdit.setOnClickListener(new OnClickListener() {
@@ -92,7 +102,9 @@ public class GuestShowDetailsStadium extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				Intent itent = new Intent(GuestShowDetailsStadium.this , ScreenEditStadium.class);
+				startActivity(itent);
+				overridePendingTransition(R.anim.slide_left, R.anim.slide_right_leave);
 			}
 		});
 	}

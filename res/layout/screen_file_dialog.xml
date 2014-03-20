@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_choose_file" >
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/layout_path"
+        android:layout_marginBottom="50dp"
+        android:dividerHeight="0dp"
+        android:divider="@color/transparent"
+        android:cacheColorHint="@color/transparent" >
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/layout_details"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#AAAAAA"
+        android:gravity="center"
+        android:paddingTop="2dp" >
+
+        <Button
+            android:id="@+id/button_select"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/select"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:text="@string/back"  
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/button_cancle"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:text="@string/cancel"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_path"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="#AAAAAA"
+        android:gravity="center_vertical"
+        android:paddingBottom="3dp" >
+
+        <TextView
+            android:id="@+id/txt_path"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/button_preview"
+            android:background="#E5E5E7"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
+            android:lines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="@string/path_file"
+            android:textColor="#9B9C9E"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/preview"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+</RelativeLayout>

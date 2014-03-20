@@ -78,5 +78,101 @@
     <string name="satellite">Satellite</string>
     <string name="traffic">Traffic</string>
     <string name="hybrid">Hybrid</string>
-
+    
+    <!-- Ta =============dialog_choose_media.xml========================================== -->
+	<string name="take_a_photo">Chụp Một Tấm Hình</string>
+	<string name="cancel">Thoát</string>
+	<string name="from_gallery">Chọn File Từ Bộ Nhớ</string>
+	<string name="preview">Xem</string>
+	<string name="path_file">Địa chỉ</string>
+	<string name="back">Trở ra</string>
+	<string name="select">Done</string>
+	
+	
+    <string-array name="image">
+        <item>png</item>
+        <item>gif</item>
+        <item>jpe</item>
+        <item>jpeg</item>
+        <item>jpg</item>
+    </string-array>
+    <string-array name="video">
+        <item>avi</item>
+        <item>flv</item>
+        <item>mp4</item>
+        <item>wmv</item>
+        <item>m4v</item>
+        <item>3gp</item>
+        <item>ogv</item>
+    </string-array>
+    <string-array name="image_video">
+        <item>png</item>
+        <item>gif</item>
+        <item>jpe</item>
+        <item>jpeg</item>
+        <item>jpg</item>
+        <item>avi</item>
+        <item>flv</item>
+        <item>mp4</item>
+        <item>wmv</item>
+        <item>m4v</item>
+        <item>3gp</item>
+        <item>ogv</item>
+    </string-array>
+    <string-array name="document">
+        <item>pdf</item>
+        <item>xls</item>
+        <item>xlsx</item>
+        <item>doc</item>
+        <item>docx</item>
+        <item>ppt</item>
+        <item>pptx</item>
+        <item>txt</item>
+    </string-array>
+    <string-array name="file">
+        <item>ogv</item>
+        <item>avi</item>
+        <item>flv</item>
+        <item>mp4</item>
+        <item>wmv</item>
+        <item>m4v</item>
+        <item>3gp</item>
+        <item>pdf</item>
+        <item>xls</item>
+        <item>xlsx</item>
+        <item>doc</item>
+        <item>docx</item>
+        <item>ppt</item>
+        <item>pptx</item>
+        <item>txt</item>
+        <item>png</item>
+        <item>gif</item>
+        <item>jpe</item>
+        <item>jpeg</item>
+        <item>jpg</item>
+    </string-array>
+    <string-array name="image_document">
+        <item>pdf</item>
+        <item>xls</item>
+        <item>xlsx</item>
+        <item>doc</item>
+        <item>docx</item>
+        <item>ppt</item>
+        <item>pptx</item>
+        <item>txt</item>
+        <item>png</item>
+        <item>gif</item>
+        <item>jpe</item>
+        <item>jpeg</item>
+        <item>jpg</item>
+    </string-array>
+    <string-array name="textsize">
+        <item>10</item>
+        <item>13</item>
+        <item>18</item>
+        <item>24</item>
+        <item>32</item>
+        <item>48</item>
+    </string-array>
+	
 </resources>

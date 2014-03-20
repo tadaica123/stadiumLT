@@ -15,6 +15,7 @@ public class StadiumDetailModel {
 	String phone;
 	String linkLogo;
 	String description;
+	Map map;
 
 	public StadiumDetailModel(String idToken, String name, String address,
 			DistrictModel district, String phone, String linkLogo) {
@@ -223,6 +224,26 @@ public class StadiumDetailModel {
 	 */
 	public void setPrice(PriceModel price) {
 		this.price = price;
+	}
+	
+	
+
+
+
+	/**
+	 * @return the map
+	 */
+	public Map getMap() {
+		return map;
+	}
+
+
+
+	/**
+	 * @param map the map to set
+	 */
+	public void setMap(Map map) {
+		this.map = map;
 	}
 
 

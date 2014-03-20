@@ -1,23 +1,33 @@
 package com.leontran.stadiumlt.owner;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -42,12 +52,16 @@ import com.leontran.stadiumlt.model.DistrictModel;
 import com.leontran.stadiumlt.model.StadiumDetailModel;
 import com.leontran.stadiumlt.model.StadiumNumberModel;
 import com.leontran.stadiumlt.network.Services;
+import com.leontran.stadiumlt.other.SelectFileDialog;
 import com.leontran.stadiumlt.ultilities.CustomListViewDialog;
 import com.leontran.stadiumlt.ultilities.Global;
 import com.leontran.stadiumlt.ultilities.Ultilities;
 
 public class ScreenAddNewStadium extends FragmentActivity implements
 		OnMapClickListener, OnMapLongClickListener, OnCameraChangeListener {
+
+	private final static int TAKE_IMAGE = 1;
+	private final static int CHOOSE_MEDIA = 10;
 
 	private CustomApplication app;
 
@@ -61,6 +75,8 @@ public class ScreenAddNewStadium extends FragmentActivity implements
 	private EditText txtDescription;
 
 	private TextView txtTitle;
+
+	ImageView imgLogo;
 
 	private LinearLayout btnBack;
 	private LinearLayout btnEdit;
@@ -79,6 +95,10 @@ public class ScreenAddNewStadium extends FragmentActivity implements
 	StadiumDetailModel dataPost;
 
 	private CustomProgressDialog dialog;
+	private Ultilities utils = new Ultilities();
+
+	private Uri imageUri;
+	private String fileName = "";
 
 	public void initComponent() {
 
@@ -93,6 +113,8 @@ public class ScreenAddNewStadium extends FragmentActivity implements
 		txtDistrict = (TextView) findViewById(R.id.txt_district);
 		txtTitle = (TextView) findViewById(R.id.txt_title);
 
+		imgLogo = (ImageView) findViewById(R.id.imageLogo);
+
 		layout_district = (RelativeLayout) findViewById(R.id.layout_district);
 		layout_map = (RelativeLayout) findViewById(R.id.ll_mapview);
 
@@ -103,7 +125,7 @@ public class ScreenAddNewStadium extends FragmentActivity implements
 		btnServiceMore = (Button) findViewById(R.id.btn_other_service);
 
 		listmarker = new ArrayList<Marker>();
-		
+
 		dialog = new CustomProgressDialog(ScreenAddNewStadium.this);
 		txtTitle.setText("New Stadium ");
 	}
@@ -145,6 +167,92 @@ public class ScreenAddNewStadium extends FragmentActivity implements
 				CustomListViewDialog dialog = new CustomListViewDialog(
 						ScreenAddNewStadium.this, txtDistrict, app);
 				dialog.show();
+			}
+		});
+		imgLogo.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				final Dialog mDialog = new Dialog(ScreenAddNewStadium.this,
+						android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+				mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				mDialog.setContentView(R.layout.dialog_option_select_media);
+				mDialog.setCancelable(true);
+
+				final LinearLayout layout_main = (LinearLayout) mDialog
+						.findViewById(R.id.layout_main);
+				Button btn_take_photo = (Button) mDialog
+						.findViewById(R.id.btn_take_photo);
+				Button btn_from_gallery = (Button) mDialog
+						.findViewById(R.id.btn_from_gallery);
+
+				Button btn_cancel = (Button) mDialog
+						.findViewById(R.id.btn_cancel);
+				mDialog.show();
+
+				final Animation animation2 = AnimationUtils.loadAnimation(
+						getApplicationContext(), R.anim.slide_bottom_to_top);
+				layout_main.startAnimation(animation2);
+				Handler handle2 = new Handler();
+				handle2.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						try {
+
+						} catch (Exception ex) {
+						}
+						animation2.cancel();
+					}
+				}, 1020);
+
+				btn_take_photo.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						capturePhoto();
+						mDialog.cancel();
+					}
+				});
+				btn_from_gallery.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intentTakePhoto = new Intent(
+								ScreenAddNewStadium.this,
+								SelectFileDialog.class);
+
+						intentTakePhoto.putExtra("type", "photo");
+						startActivityForResult(intentTakePhoto, CHOOSE_MEDIA);
+						overridePendingTransition(R.anim.slide_left,
+								R.anim.slide_right_leave);
+						mDialog.cancel();
+					}
+				});
+
+				btn_cancel.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						final Animation animation2 = AnimationUtils
+								.loadAnimation(getApplicationContext(),
+										R.anim.slide_top_to_bottom);
+						layout_main.startAnimation(animation2);
+						Handler handle2 = new Handler();
+						handle2.postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								try {
+
+								} catch (Exception ex) {
+								}
+								animation2.cancel();
+							}
+						}, 1020);
+						mDialog.cancel();
+					}
+				});
 			}
 		});
 		btnEdit.setOnClickListener(new OnClickListener() {
@@ -271,7 +379,7 @@ public class ScreenAddNewStadium extends FragmentActivity implements
 				setUpMap();
 			}
 		}
-	}  
+	}
 
 	private void setUpMap() {
 		mMap.setOnMapClickListener(this);
@@ -350,7 +458,66 @@ public class ScreenAddNewStadium extends FragmentActivity implements
 	public void onCameraChange(final CameraPosition position) {
 		// mCameraTextView.setText(position.toString());
 	}
-	
+
+	public void capturePhoto() {
+		fileName = "msa_img";
+		String value = utils.GetCurrentTime();
+		fileName += "_" + value + ".jpg";
+		File file = new File(Environment.getExternalStorageDirectory()
+				.getPath(), fileName);
+		imageUri = Uri.fromFile(file);
+		Intent intent = new Intent(
+				android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+		startActivityForResult(intent, TAKE_IMAGE);
+
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == TAKE_IMAGE) {
+			if (resultCode == RESULT_OK) {
+
+				File f = new File(Environment.getExternalStorageDirectory()
+						.getPath() + "/" + fileName);
+				if (f.exists()) {
+					Log.d("file", fileName);
+					app.setLinks(Environment.getExternalStorageDirectory()
+							.getPath() + "/" + fileName);
+					Bitmap bitmap = utils.decodeFile(Environment
+							.getExternalStorageDirectory().getPath()
+							+ "/"
+							+ fileName);
+					imgLogo.setImageBitmap(bitmap);
+				} else {
+					Toast.makeText(getApplicationContext(),
+							"Failed to take the photo. Please try again",
+							Toast.LENGTH_LONG).show();
+				}
+			}
+		}
+		if ((requestCode == CHOOSE_MEDIA) && (resultCode == RESULT_OK)) {
+
+			if (!app.getLinks().equals("")) {
+				if (app.getLinks().contains("/")) {
+					String[] listTypeImage = getResources().getStringArray(
+							R.array.image);
+					String[] nameFile = app.getLinks().split("/");
+					String filDescription = nameFile[nameFile.length - 1];
+					for (int i = 0; i < listTypeImage.length; i++) {
+						if (filDescription.contains("." + listTypeImage[i])) {
+							Bitmap bitmap = utils.decodeFile(app.getLinks());
+							imgLogo.setImageBitmap(bitmap);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();

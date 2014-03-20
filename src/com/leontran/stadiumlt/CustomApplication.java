@@ -16,6 +16,8 @@ public class CustomApplication extends Application {
 
 	private String venueAddress = null;
 
+	private String links;
+
 	public int tyleLogin;
 
 	public DistrictModel returnDistrict;
@@ -142,6 +144,21 @@ public class CustomApplication extends Application {
 	 */
 	public void setVenueAddress(String venueAddress) {
 		this.venueAddress = venueAddress;
+	}
+
+	/**
+	 * @return the links
+	 */
+	public String getLinks() {
+		return links;
+	}
+
+	/**
+	 * @param links
+	 *            the links to set
+	 */
+	public void setLinks(String links) {
+		this.links = links;
 	}
 
 	public void resetLogin() {

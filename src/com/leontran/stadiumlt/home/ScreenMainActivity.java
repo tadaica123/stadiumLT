@@ -24,6 +24,7 @@ import com.leontran.stadiumlt.R;
 import com.leontran.stadiumlt.gson.GetStadiumDetailGson;
 import com.leontran.stadiumlt.guest.GuestShowDetailsStadium;
 import com.leontran.stadiumlt.model.DistrictModel;
+import com.leontran.stadiumlt.model.Map;
 import com.leontran.stadiumlt.model.PriceModel;
 import com.leontran.stadiumlt.model.StadiumDetailModel;
 import com.leontran.stadiumlt.model.StadiumNumberModel;
@@ -125,6 +126,9 @@ public class ScreenMainActivity extends BaseActivity {
 						rowData.setPrice(price);
 						rowData.setDescription(response.get(i).description);
 						rowData.setOwnerId(response.get(i).ownerId);
+						Map map = new Map();
+						map.setLat(response.get(i).map.lat);
+						map.setLng(response.get(i).map.lng);
 						listStadiumData.add(rowData);
 					}
 				}
