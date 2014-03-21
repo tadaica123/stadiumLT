@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.leontran.stadiumlt.CustomApplication;
 import com.leontran.stadiumlt.R;
@@ -32,6 +33,9 @@ public class GuestShowDetailsStadium extends Activity {
 	private TextView txtPriceMorning;
 	private TextView txtPriceAfternoon;
 	private TextView txtPriceEvening;
+	private TextView txtPriceMorning7;
+	private TextView txtPriceAfternoon7;
+	private TextView txtPriceEvening7;
 	private TextView txtDescription;
 	
 	private TextView txtTitle;
@@ -56,6 +60,9 @@ public class GuestShowDetailsStadium extends Activity {
 		txtPriceMorning = (TextView) findViewById(R.id.txt_price_morning);
 		txtPriceAfternoon = (TextView) findViewById(R.id.txt_price_afternoon);
 		txtPriceEvening = (TextView) findViewById(R.id.txt_price_evening);
+		txtPriceMorning7 = (TextView) findViewById(R.id.txt_price_morning7);
+		txtPriceAfternoon7 = (TextView) findViewById(R.id.txt_price_afternoon7);
+		txtPriceEvening7 = (TextView) findViewById(R.id.txt_price_evening7);
 		txtDescription = (TextView) findViewById(R.id.txt_description);
 		
 		txtTitle = (TextView) findViewById(R.id.txt_title);
@@ -69,7 +76,7 @@ public class GuestShowDetailsStadium extends Activity {
 //		dialog = new CustomProgressDialog(GuestShowDetailsStadium.this);
 		
 		btnEdit.setVisibility(View.GONE);
-		txtTitle.setText("Stadium Detail");
+		txtTitle.setText("Thông tin sân ");
 	}
 
 	public void initListener() {
@@ -89,24 +96,23 @@ public class GuestShowDetailsStadium extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Map map = new Map(app.getStadiumDetails().getMap().getLat(), app.getStadiumDetails().getMap().getLng());
-				app.setMap(map);
-				app.setVenueAddress(app.getStadiumDetails().getAddress());
-				Intent itent = new Intent(GuestShowDetailsStadium.this , ScreenShowMapView.class);
-				startActivity(itent);
-				overridePendingTransition(R.anim.slide_left, R.anim.slide_right_leave);
+				if (app.getStadiumDetails().getMap()!=null){
+					if (app.getStadiumDetails().getMap().getLat().equals("") || app.getStadiumDetails().getMap().getLng().equals("")){
+						Toast.makeText(GuestShowDetailsStadium.this, "Địa chỉ chưa có thiết lập trên bản đồ !!", Toast.LENGTH_LONG).show();
+					} else {
+						Map map = new Map(app.getStadiumDetails().getMap().getLat(), app.getStadiumDetails().getMap().getLng());
+						app.setMap(map);
+						app.setVenueAddress(app.getStadiumDetails().getAddress());
+						Intent itent = new Intent(GuestShowDetailsStadium.this , ScreenShowMapView.class);
+						startActivity(itent);
+						overridePendingTransition(R.anim.slide_left, R.anim.slide_right_leave);
+					}
+				} else {
+					Toast.makeText(GuestShowDetailsStadium.this, "Địa chỉ chưa có thiết lập trên bản đồ !!", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
-		btnEdit.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent itent = new Intent(GuestShowDetailsStadium.this , ScreenEditStadium.class);
-				startActivity(itent);
-				overridePendingTransition(R.anim.slide_left, R.anim.slide_right_leave);
-			}
-		});
+
 	}
 
 	@Override
@@ -128,14 +134,28 @@ public class GuestShowDetailsStadium extends Activity {
 		txtDistrict.setText(getData.getDistrict().getName());
 		txtEmail.setText(getData.getEmail());
 		txtPhone.setText(getData.getPhone());
-		txtNumberStadium5.setText(getData.getField().getFive_people() + " Sân (Loại Sân 5 Người)");
-		txtNumberStadium7.setText(getData.getField().getSeven_people() + " Sân (Loại Sân 7 Người)");
+		txtNumberStadium5.setText(getData.getField().getFive_people() + " Sân (Loại sân 5 người)");
+		txtNumberStadium7.setText(getData.getField().getSeven_people() + " Sân (Loại sân 7 người)");
 		txtDescription.setText(getData.getDescription());
-		txtPriceMorning.setText(getData.getPrice().getPriceMorning()+ " Sáng (6h00 - 14h00)");
-		txtPriceAfternoon.setText(getData.getPrice().getPriceAfternoon()+ " Chiều (14h00 - 18h00)");
-		txtPriceEvening.setText(getData.getPrice().getPriceEvening()+ " Tối (18h00 - 23h00)");
+		txtPriceMorning.setText(getData.getPrice5().getPriceMorning()+ " Sáng (6h00 - 14h00)");
+		txtPriceAfternoon.setText(getData.getPrice5().getPriceAfternoon()+ " Chiều (14h00 - 18h00)");
+		txtPriceEvening.setText(getData.getPrice5().getPriceEvening()+ " Tối (18h00 - 23h00)");
+		txtPriceMorning7.setText(getData.getPrice7().getPriceMorning()+ " Sáng (6h00 - 14h00)");
+		txtPriceAfternoon7.setText(getData.getPrice7().getPriceAfternoon()+ " Chiều (14h00 - 18h00)");
+		txtPriceEvening7.setText(getData.getPrice7().getPriceEvening()+ " Tối (18h00 - 23h00)");
 		if (getData.getOwnerId().equals(app.getToken_api())){
-			btnEdit.setVisibility(View.VISIBLE);
+			btnEdit.setVisibility(View.INVISIBLE);
+		} else{
+			btnEdit.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent itent = new Intent(GuestShowDetailsStadium.this , ScreenEditStadium.class);
+					startActivity(itent);
+					overridePendingTransition(R.anim.slide_left, R.anim.slide_right_leave);
+				}
+			});
 		}
 	}
 	

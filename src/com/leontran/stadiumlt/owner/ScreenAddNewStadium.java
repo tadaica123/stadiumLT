@@ -49,6 +49,8 @@ import com.leontran.stadiumlt.CustomProgressDialog;
 import com.leontran.stadiumlt.R;
 import com.leontran.stadiumlt.home.ScreenMainActivity;
 import com.leontran.stadiumlt.model.DistrictModel;
+import com.leontran.stadiumlt.model.Map;
+import com.leontran.stadiumlt.model.PriceModel;
 import com.leontran.stadiumlt.model.StadiumDetailModel;
 import com.leontran.stadiumlt.model.StadiumNumberModel;
 import com.leontran.stadiumlt.network.Services;
@@ -73,6 +75,13 @@ public class ScreenAddNewStadium extends FragmentActivity implements
 	private EditText txtNumberStadium5;
 	private EditText txtNumberStadium7;
 	private EditText txtDescription;
+	
+	private EditText edtFivePriceMorning;
+	private EditText edtFivePriceAfternoon;
+	private EditText edtFivePriceEvening;
+	private EditText edtSevenPriceMorning;
+	private EditText edtSevenPriceAfternoon;
+	private EditText edtSevenPriceEvening;
 
 	private TextView txtTitle;
 
@@ -109,6 +118,12 @@ public class ScreenAddNewStadium extends FragmentActivity implements
 		txtNumberStadium5 = (EditText) findViewById(R.id.txt_stadium_five);
 		txtNumberStadium7 = (EditText) findViewById(R.id.txt_stadium_seven);
 		txtDescription = (EditText) findViewById(R.id.txt_description);
+		edtFivePriceMorning = (EditText) findViewById(R.id.edt_five_morning);
+		edtFivePriceAfternoon = (EditText) findViewById(R.id.edt_five_afternoon);
+		edtFivePriceEvening = (EditText) findViewById(R.id.edt_five_evening);
+		edtSevenPriceMorning = (EditText) findViewById(R.id.edt_seven_morning);
+		edtSevenPriceAfternoon = (EditText) findViewById(R.id.edt_seven_afternoon);
+		edtSevenPriceEvening = (EditText) findViewById(R.id.edt_seven_evening);
 
 		txtDistrict = (TextView) findViewById(R.id.txt_district);
 		txtTitle = (TextView) findViewById(R.id.txt_title);
@@ -127,7 +142,8 @@ public class ScreenAddNewStadium extends FragmentActivity implements
 		listmarker = new ArrayList<Marker>();
 
 		dialog = new CustomProgressDialog(ScreenAddNewStadium.this);
-		txtTitle.setText("New Stadium ");
+		txtTitle.setText("Thêm Sân Mới ");
+		Global.lat = ""; Global.lng = "";
 	}
 
 	public void initListener() {
@@ -289,7 +305,18 @@ public class ScreenAddNewStadium extends FragmentActivity implements
 					field.setSeven_people(txtNumberStadium7.getText()
 							.toString());
 					dataPost.setField(field);
+					PriceModel price = new PriceModel();
+					price.setPriceMorning(edtFivePriceMorning.getText().toString().trim());
+					price.setPriceAfternoon(edtFivePriceAfternoon.getText().toString().trim());
+					price.setPriceEvening(edtFivePriceEvening.getText().toString().trim());
+					dataPost.setPrice5(price);
+					price = new PriceModel();
+					price.setPriceMorning(edtSevenPriceMorning.getText().toString().trim());
+					price.setPriceAfternoon(edtSevenPriceAfternoon.getText().toString().trim());
+					price.setPriceEvening(edtSevenPriceEvening.getText().toString().trim());
+					dataPost.setPrice7(price);
 					dataPost.setOwnerId(app.getToken_api());
+					dataPost.setMap(new Map(Global.lat, Global.lng));
 					AddDataToServer postToWS = new AddDataToServer();
 					postToWS.execute("");
 				}

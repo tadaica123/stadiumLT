@@ -11,7 +11,8 @@ public class StadiumDetailModel {
 	String email;
 	DistrictModel district;
 	StadiumNumberModel field;
-	PriceModel price;
+	PriceModel price5;
+	PriceModel price7;
 	String phone;
 	String linkLogo;
 	String description;
@@ -213,8 +214,8 @@ public class StadiumDetailModel {
 	/**
 	 * @return the price
 	 */
-	public PriceModel getPrice() {
-		return price;
+	public PriceModel getPrice5() {
+		return price5;
 	}
 
 
@@ -222,8 +223,25 @@ public class StadiumDetailModel {
 	/**
 	 * @param price the price to set
 	 */
-	public void setPrice(PriceModel price) {
-		this.price = price;
+	public void setPrice7(PriceModel price) {
+		this.price7 = price;
+	}
+	
+
+	/**
+	 * @return the price
+	 */
+	public PriceModel getPrice7() {
+		return price7;
+	}
+
+
+
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice5(PriceModel price) {
+		this.price5 = price;
 	}
 	
 	
@@ -250,7 +268,7 @@ public class StadiumDetailModel {
 
 	public StadiumDetailModel(String idToken, String ownerId, String name,
 			String address, String email, DistrictModel district,
-			StadiumNumberModel field, PriceModel price, String phone,
+			StadiumNumberModel field, PriceModel price5, PriceModel price7, String phone,
 			String linkLogo, String description) {
 		super();
 		this.idToken = idToken;
@@ -260,7 +278,8 @@ public class StadiumDetailModel {
 		this.email = email;
 		this.district = district;
 		this.field = field;
-		this.price = price;
+		this.price5 = price5;
+		this.price7 = price7;
 		this.phone = phone;
 		this.linkLogo = linkLogo;
 		this.description = description;

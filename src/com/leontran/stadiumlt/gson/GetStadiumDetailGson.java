@@ -42,8 +42,11 @@ public class GetStadiumDetailGson extends ArrayList<GetTypeStadiumGson> {
 		@SerializedName("field_number")
 		public GetFieldGson field_number;
 		
-		@SerializedName("price")
-		public GetPriceGson price;
+		@SerializedName("price_five")
+		public GetPriceGson price_five;
+		
+		@SerializedName("price_seven")
+		public GetPriceGson price_seven;
 	}
 	
 	public class GetTypeMap {

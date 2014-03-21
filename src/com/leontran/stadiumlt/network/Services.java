@@ -451,11 +451,26 @@ public class Services {
 			json.put("field_number", jsonfield);
 			
 			JSONObject jsonPrice = new JSONObject();
-			jsonfield.put("morning", "");
-			jsonfield.put("afternoon", "");
-			jsonfield.put("evening", "");
-			json.put("price", jsonPrice);
+			jsonfield.put("morning", data.getPrice5().getPriceMorning());
+			jsonfield.put("afternoon", data.getPrice5().getPriceAfternoon());
+			jsonfield.put("evening", data.getPrice5().getPriceEvening());
+			json.put("price_five", jsonPrice);
 			
+			jsonPrice = new JSONObject();
+			jsonfield.put("morning", data.getPrice7().getPriceMorning());
+			jsonfield.put("afternoon", data.getPrice7().getPriceAfternoon());
+			jsonfield.put("evening", data.getPrice7().getPriceEvening());
+			json.put("price_seven", jsonPrice);
+			
+			JSONObject jsonMap = new JSONObject();
+			jsonMap.put("long", data.getMap().getLng());
+			jsonMap.put("lat", data.getMap().getLat());
+			json.put("map", jsonMap);
+			
+			JSONObject jsonDistrict = new JSONObject();
+			jsonDistrict.put("id", data.getDistrict().getId());
+			jsonDistrict.put("name", data.getDistrict().getName());
+			json.put("district", jsonDistrict);
 			
 			json.put("description", data.getDescription());
 			json.put("ownerId", data.getOwnerId());

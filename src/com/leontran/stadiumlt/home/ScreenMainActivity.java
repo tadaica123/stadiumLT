@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +19,7 @@ import android.widget.TextView;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.leontran.stadiumlt.CustomApplication;
 import com.leontran.stadiumlt.CustomProgressDialog;
+import com.leontran.stadiumlt.LoginActivity;
 import com.leontran.stadiumlt.R;
 import com.leontran.stadiumlt.gson.GetStadiumDetailGson;
 import com.leontran.stadiumlt.guest.GuestShowDetailsStadium;
@@ -120,15 +120,21 @@ public class ScreenMainActivity extends BaseActivity {
 						field.setSeven_people(response.get(i).field_number.seven_people);
 						rowData.setField(field);
 						PriceModel price = new PriceModel();
-						price.setPriceMorning(response.get(i).price.morning);
-						price.setPriceAfternoon(response.get(i).price.afternoon);
-						price.setPriceEvening(response.get(i).price.evening);
-						rowData.setPrice(price);
+						price.setPriceMorning(response.get(i).price_five.morning);
+						price.setPriceAfternoon(response.get(i).price_five.afternoon);
+						price.setPriceEvening(response.get(i).price_five.evening);
+						rowData.setPrice5(price);
+						price = new PriceModel();
+						price.setPriceMorning(response.get(i).price_seven.morning);
+						price.setPriceAfternoon(response.get(i).price_seven.afternoon);
+						price.setPriceEvening(response.get(i).price_seven.evening);
+						rowData.setPrice7(price);
 						rowData.setDescription(response.get(i).description);
 						rowData.setOwnerId(response.get(i).ownerId);
 						Map map = new Map();
 						map.setLat(response.get(i).map.lat);
 						map.setLng(response.get(i).map.lng);
+						rowData.setMap(map);
 						listStadiumData.add(rowData);
 					}
 				}
@@ -140,7 +146,7 @@ public class ScreenMainActivity extends BaseActivity {
 						listStadiumData, app);
 				listviewMain.setAdapter(adapter);
 				adapter.notifyDataSetChanged();
-				tvTitle.setText("Tất Cả Các Sân");
+				tvTitle.setText("Tất Cả Các Sân ");
 			}
 
 			@Override
@@ -217,6 +223,7 @@ public class ScreenMainActivity extends BaseActivity {
 		initComponent();
 		initListener();
 		// initData();
+		tvTitle.setText("Tất Cả Các Sân ");
 		listStadiumData = new ArrayList<StadiumDetailModel>();
 
 		LoadDataFromServer loadData = new LoadDataFromServer();
@@ -228,102 +235,122 @@ public class ScreenMainActivity extends BaseActivity {
 		switch (filter) {
 		case R.id.q_all: {
 			adapter.getFilter().filter("");
-			tvTitle.setText("Tất Cả Các Sân");
+			tvTitle.setText("Tất Cả Các Sân ");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_1: {
 			adapter.getFilter().filter("q_1");
 			tvTitle.setText("Sân Vận Động Quận 1");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_2: {
 			adapter.getFilter().filter("q_2");
 			tvTitle.setText("Sân Vận Động Quận 2");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_3: {
 			adapter.getFilter().filter("q_3");
 			tvTitle.setText("Sân Vận Động Quận 3");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_4: {
 			adapter.getFilter().filter("q_4");
 			tvTitle.setText("Sân Vận Động Quận 4");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_5: {
 			adapter.getFilter().filter("q_5");
 			tvTitle.setText("Sân Vận Động Quận 5");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_6: {
 			adapter.getFilter().filter("q_6");
 			tvTitle.setText("Sân Vận Động Quận 6");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_7: {
 			adapter.getFilter().filter("q_7");
 			tvTitle.setText("Sân Vận Động Quận 7");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_8: {
 			adapter.getFilter().filter("q_8");
 			tvTitle.setText("Sân Vận Động Quận 8");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_9: {
 			adapter.getFilter().filter("q_9");
 			tvTitle.setText("Sân Vận Động Quận 9");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_10: {
 			adapter.getFilter().filter("q_10");
 			tvTitle.setText("Sân Vận Động Quận 10");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_11: {
 			adapter.getFilter().filter("q_11");
 			tvTitle.setText("Sân Vận Động Quận 11");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_12: {
 			adapter.getFilter().filter("q_12");
 			tvTitle.setText("Sân Vận Động Quận 12");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_gv: {
 			adapter.getFilter().filter("q_gv");
-			tvTitle.setText("SVD Quận Gò Vấp");
+			tvTitle.setText("SVD Quận Gò Vấp ");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_tb: {
 			adapter.getFilter().filter("q_tb");
-			tvTitle.setText("SVD Quận Tân Bình");
+			tvTitle.setText("SVD Quận Tân ");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_tp: {
 			adapter.getFilter().filter("q_tp");
-			tvTitle.setText("SVD Quận Tân Phú");
+			tvTitle.setText("SVD Quận Tân ");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_bth: {
 			adapter.getFilter().filter("q_bth");
-			tvTitle.setText("SVD Quận Bình Thạnh");
+			tvTitle.setText("SVD Quận Bình Thạnh ");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_td: {
 			adapter.getFilter().filter("q_td");
-			tvTitle.setText("SVD Quận Thủ Đức");
+			tvTitle.setText("SVD Quận Thủ Đức ");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_pn: {
 			adapter.getFilter().filter("q_pn");
-			tvTitle.setText("SVD Quận Phú Nhuận");
+			tvTitle.setText("SVD Quận Phú Nhuận ");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.q_bta: {
 			adapter.getFilter().filter("q_bta");
-			tvTitle.setText("SVD Quận Bình Tân");
+			tvTitle.setText("SVD Quận Bình Tân ");
+			getSlidingMenu().showContent();
 			break;
 		}
 		case R.id.add_new: {
@@ -339,7 +366,8 @@ public class ScreenMainActivity extends BaseActivity {
 				checkshow = 1;
 				LoadDataFromServerWithOwner loadData = new LoadDataFromServerWithOwner();
 				loadData.execute("");
-				tvTitle.setText("Tất Cả Các Sân Của Tôi");
+				tvTitle.setText("Tất Cả Các Sân Của Tôi ");
+				getSlidingMenu().showContent();
 			}
 			break;
 		}
@@ -349,23 +377,20 @@ public class ScreenMainActivity extends BaseActivity {
 				checkshow = 0;
 				LoadDataFromServer loadData = new LoadDataFromServer();
 				loadData.execute("");
-				tvTitle.setText("Tất Cả Các Sân");
+				tvTitle.setText("Tất Cả Các Sân ");
+				getSlidingMenu().showContent();
 			}
 			break;
 		}
 		case R.id.sign_out: {
-			finish();
+			Intent intent = new Intent(ScreenMainActivity.this,
+					LoginActivity.class);
+			startActivity(intent);
 			overridePendingTransition(R.anim.slide_right,
 					R.anim.slide_left_leave);
 			break;
 		}
 		}
-		Handler h = new Handler();
-		h.postDelayed(new Runnable() {
-			public void run() {
-				getSlidingMenu().showContent();
-			}
-		}, 50);
 	}
 
 	private class LoadDataFromServer extends AsyncTask<String, Void, String> {
@@ -422,12 +447,21 @@ public class ScreenMainActivity extends BaseActivity {
 						field.setSeven_people(response.get(i).field_number.seven_people);
 						rowData.setField(field);
 						PriceModel price = new PriceModel();
-						price.setPriceMorning(response.get(i).price.morning);
-						price.setPriceAfternoon(response.get(i).price.afternoon);
-						price.setPriceEvening(response.get(i).price.evening);
-						rowData.setPrice(price);
+						price.setPriceMorning(response.get(i).price_five.morning);
+						price.setPriceAfternoon(response.get(i).price_five.afternoon);
+						price.setPriceEvening(response.get(i).price_five.evening);
+						rowData.setPrice5(price);
+						price = new PriceModel();
+						price.setPriceMorning(response.get(i).price_seven.morning);
+						price.setPriceAfternoon(response.get(i).price_seven.afternoon);
+						price.setPriceEvening(response.get(i).price_seven.evening);
+						rowData.setPrice7(price);
 						rowData.setDescription(response.get(i).description);
 						rowData.setOwnerId(response.get(i).ownerId);
+						Map map = new Map();
+						map.setLat(response.get(i).map.lat);
+						map.setLng(response.get(i).map.lng);
+						rowData.setMap(map);
 						listStadiumData.add(rowData);
 					}
 				}
@@ -520,12 +554,21 @@ public class ScreenMainActivity extends BaseActivity {
 						field.setSeven_people(response.get(i).field_number.seven_people);
 						rowData.setField(field);
 						PriceModel price = new PriceModel();
-						price.setPriceMorning(response.get(i).price.morning);
-						price.setPriceAfternoon(response.get(i).price.afternoon);
-						price.setPriceEvening(response.get(i).price.evening);
-						rowData.setPrice(price);
+						price.setPriceMorning(response.get(i).price_five.morning);
+						price.setPriceAfternoon(response.get(i).price_five.afternoon);
+						price.setPriceEvening(response.get(i).price_five.evening);
+						rowData.setPrice5(price);
+						price = new PriceModel();
+						price.setPriceMorning(response.get(i).price_seven.morning);
+						price.setPriceAfternoon(response.get(i).price_seven.afternoon);
+						price.setPriceEvening(response.get(i).price_seven.evening);
+						rowData.setPrice7(price);
 						rowData.setDescription(response.get(i).description);
 						rowData.setOwnerId(response.get(i).ownerId);
+						Map map = new Map();
+						map.setLat(response.get(i).map.lat);
+						map.setLng(response.get(i).map.lng);
+						rowData.setMap(map);
 						listStadiumData.add(rowData);
 					}
 				}

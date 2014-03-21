@@ -55,7 +55,8 @@
     <string name="email">Email </string>
     <string name="phone">Số Điện Thoại </string>
     <string name="number_stadium">Số Sân </string>
-    <string name="price">Giá cả </string>
+    <string name="price5">Giá cả sân 5\n/1 giờ </string>
+    <string name="price7">Giá cả sân 7\n/1 giờ </string>
     <string name="five_number">Sân 5 Người </string>
     <string name="seven_number">Sân 7 Người </string>
     <string name="description">Mô tả </string>

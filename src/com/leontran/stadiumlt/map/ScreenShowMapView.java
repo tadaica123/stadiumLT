@@ -54,6 +54,7 @@ public class ScreenShowMapView extends FragmentActivity implements
 	private TextView txt_title;
 	CustomApplication apps;
 	LinearLayout btn_home;
+	LinearLayout ll_navigate;
 	Double lat = 0.0;
 	Double lng = 0.0;
 	private LocationClient mLocationClient;
@@ -81,17 +82,19 @@ public class ScreenShowMapView extends FragmentActivity implements
 		setUpMapIfNeeded();
 		apps = (CustomApplication) getApplication();
 		btn_home = (LinearLayout) findViewById(R.id.layout_button_left);
+		ll_navigate = (LinearLayout) findViewById(R.id.layout_button_right);
 		btn_standard = (Button) findViewById(R.id.btn_standard);
 		btn_satellite = (Button) findViewById(R.id.btn_satellite);
 		btn_hybrid = (Button) findViewById(R.id.btn_hybrid);
-		btn_navigate = (Button) findViewById(R.id.layout_button_right);
+		btn_navigate = (Button) findViewById(R.id.btn_right);
 		txt_title = (TextView) findViewById(R.id.txt_title);
-		txt_title.setText(apps.getVenueName());
+		txt_title.setText("Định Vị ");
 		btn_standard.setOnClickListener(this);
 		btn_satellite.setOnClickListener(this);
 		btn_hybrid.setOnClickListener(this);
-		btn_navigate.setOnClickListener(this);
-		btn_navigate.setText("Navigate");
+		ll_navigate.setOnClickListener(this);
+		btn_navigate.setText("Điều Hướng");
+		ll_navigate.setVisibility(View.VISIBLE);
 
 		btn_home.setOnClickListener(new OnClickListener() {
 

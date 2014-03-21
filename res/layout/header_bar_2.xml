@@ -68,6 +68,7 @@
                     android:layout_height="@dimen/btn_height_team"
                     android:background="@color/transparent"
                     android:text="@string/done"
+                    android:clickable="false"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
