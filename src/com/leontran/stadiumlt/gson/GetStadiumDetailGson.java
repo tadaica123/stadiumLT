@@ -9,6 +9,9 @@ import com.leontran.stadiumlt.gson.GetStadiumDetailGson.GetTypeStadiumGson;
 public class GetStadiumDetailGson extends ArrayList<GetTypeStadiumGson> {
 	
 	public class GetTypeStadiumGson{
+		@SerializedName("_id")
+		public String id;
+		
 		@SerializedName("name")
 		public String name;
 

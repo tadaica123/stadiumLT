@@ -107,6 +107,7 @@ public class ScreenMainActivity extends BaseActivity {
 					listStadiumData = new ArrayList<StadiumDetailModel>();
 					for (int i = 0; i < response.size(); i++) {
 						StadiumDetailModel rowData = new StadiumDetailModel();
+						rowData.setIdToken(response.get(i).id);
 						rowData.setName(response.get(i).name);
 						rowData.setAddress(response.get(i).address);
 						DistrictModel district = new DistrictModel();
@@ -434,6 +435,7 @@ public class ScreenMainActivity extends BaseActivity {
 					listStadiumData = new ArrayList<StadiumDetailModel>();
 					for (int i = 0; i < response.size(); i++) {
 						StadiumDetailModel rowData = new StadiumDetailModel();
+						rowData.setIdToken(response.get(i).id);
 						rowData.setName(response.get(i).name);
 						rowData.setAddress(response.get(i).address);
 						DistrictModel district = new DistrictModel();

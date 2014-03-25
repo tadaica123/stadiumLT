@@ -63,6 +63,10 @@
             android:name=".owner.ScreenAddNewStadium"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
+                <activity
+            android:name=".owner.ScreenEditStadium"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".map.ScreenShowMapView"
             android:screenOrientation="portrait"

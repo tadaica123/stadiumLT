@@ -206,7 +206,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 	public void setDomainServer() {
 //		app.setLoginServer("http://192.168.1.171:3000");
-		app.setLoginServer("http://192.168.0.107:3000");
+		app.setLoginServer("http://192.168.0.108:3000");
 	}
 
 	private class SignInTheServer extends AsyncTask<String, Void, String> {

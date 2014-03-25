@@ -451,15 +451,15 @@ public class Services {
 			json.put("field_number", jsonfield);
 			
 			JSONObject jsonPrice = new JSONObject();
-			jsonfield.put("morning", data.getPrice5().getPriceMorning());
-			jsonfield.put("afternoon", data.getPrice5().getPriceAfternoon());
-			jsonfield.put("evening", data.getPrice5().getPriceEvening());
+			jsonPrice.put("morning", data.getPrice5().getPriceMorning());
+			jsonPrice.put("afternoon", data.getPrice5().getPriceAfternoon());
+			jsonPrice.put("evening", data.getPrice5().getPriceEvening());
 			json.put("price_five", jsonPrice);
 			
 			jsonPrice = new JSONObject();
-			jsonfield.put("morning", data.getPrice7().getPriceMorning());
-			jsonfield.put("afternoon", data.getPrice7().getPriceAfternoon());
-			jsonfield.put("evening", data.getPrice7().getPriceEvening());
+			jsonPrice.put("morning", data.getPrice7().getPriceMorning());
+			jsonPrice.put("afternoon", data.getPrice7().getPriceAfternoon());
+			jsonPrice.put("evening", data.getPrice7().getPriceEvening());
 			json.put("price_seven", jsonPrice);
 			
 			JSONObject jsonMap = new JSONObject();
@@ -478,8 +478,8 @@ public class Services {
 			HttpResponse re = Services.doPost(url, json.toString());
 			String temp = EntityUtils.toString(re.getEntity());
 			
-			Log.i("Resulst:", temp);
-			Log.i("json:", json.toString());
+			Log.d("Resulst:", temp);
+			Log.d("json:", json.toString());
 			result = temp;
 
 		} catch (ClientProtocolException e) {
@@ -493,6 +493,91 @@ public class Services {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public String EditStadium(Activity activity, String url, StadiumDetailModel data) {
+		String result = "";
+		try {
+
+			JSONObject json = new JSONObject();
+			json.put("name", data.getName());
+			json.put("address", data.getAddress());
+			json.put("phone", data.getPhone());
+			json.put("email", data.getEmail());
+			json.put("contact", "");
+			
+			JSONObject jsonfield = new JSONObject();
+			jsonfield.put("five_people", data.getField().getFive_people());
+			jsonfield.put("seven_people", data.getField().getSeven_people());
+			json.put("field_number", jsonfield);
+			
+			JSONObject jsonPrice = new JSONObject();
+			jsonPrice.put("morning", data.getPrice5().getPriceMorning());
+			jsonPrice.put("afternoon", data.getPrice5().getPriceAfternoon());
+			jsonPrice.put("evening", data.getPrice5().getPriceEvening());
+			json.put("price_five", jsonPrice);
+			
+			jsonPrice = new JSONObject();
+			jsonPrice.put("morning", data.getPrice7().getPriceMorning());
+			jsonPrice.put("afternoon", data.getPrice7().getPriceAfternoon());
+			jsonPrice.put("evening", data.getPrice7().getPriceEvening());
+			json.put("price_seven", jsonPrice);
+			
+			JSONObject jsonMap = new JSONObject();
+			jsonMap.put("long", data.getMap().getLng());
+			jsonMap.put("lat", data.getMap().getLat());
+			json.put("map", jsonMap);
+			
+			JSONObject jsonDistrict = new JSONObject();
+			jsonDistrict.put("id", data.getDistrict().getId());
+			jsonDistrict.put("name", data.getDistrict().getName());
+			json.put("district", jsonDistrict);
+			
+			json.put("description", data.getDescription());
+			json.put("ownerId", data.getOwnerId());
+
+			HttpResponse re = Services.doPut(url, json.toString());
+			String temp = EntityUtils.toString(re.getEntity());
+			
+			Log.d("Resulst:", temp);
+			Log.d("json:", json.toString());
+			result = temp;
+
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public String Delete(Activity activity, String url) {
+
+		String result = "";
+
+		try {
+
+			HttpResponse re = Services.doRemove(url);
+			String temp = EntityUtils.toString(re.getEntity());
+			Log.i("url:", url);
+			Log.i("Resulst:", temp);
+			result = temp;
+
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return result;
+
 	}
 
 

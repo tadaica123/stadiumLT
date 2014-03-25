@@ -1,33 +1,70 @@
 package com.leontran.stadiumlt.owner;
 
-import android.app.Activity;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
+import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.leontran.stadiumlt.CustomApplication;
 import com.leontran.stadiumlt.CustomProgressDialog;
 import com.leontran.stadiumlt.R;
 import com.leontran.stadiumlt.home.ScreenMainActivity;
 import com.leontran.stadiumlt.model.DistrictModel;
+import com.leontran.stadiumlt.model.Map;
+import com.leontran.stadiumlt.model.PriceModel;
 import com.leontran.stadiumlt.model.StadiumDetailModel;
 import com.leontran.stadiumlt.model.StadiumNumberModel;
 import com.leontran.stadiumlt.network.Services;
+import com.leontran.stadiumlt.other.SelectFileDialog;
 import com.leontran.stadiumlt.ultilities.CustomListViewDialog;
+import com.leontran.stadiumlt.ultilities.Global;
 import com.leontran.stadiumlt.ultilities.Ultilities;
 
-public class ScreenEditStadium extends Activity {
+public class ScreenEditStadium extends FragmentActivity implements
+OnMapClickListener, OnMapLongClickListener, OnCameraChangeListener {
+
+	private final static int TAKE_IMAGE = 1;
+	private final static int CHOOSE_MEDIA = 10;
 
 	private CustomApplication app;
 
@@ -39,19 +76,42 @@ public class ScreenEditStadium extends Activity {
 	private EditText txtNumberStadium5;
 	private EditText txtNumberStadium7;
 	private EditText txtDescription;
+	
+	private EditText edtFivePriceMorning;
+	private EditText edtFivePriceAfternoon;
+	private EditText edtFivePriceEvening;
+	private EditText edtSevenPriceMorning;
+	private EditText edtSevenPriceAfternoon;
+	private EditText edtSevenPriceEvening;
 
 	private TextView txtTitle;
 
+	ImageView imgLogo;
+
 	private LinearLayout btnBack;
 	private LinearLayout btnEdit;
+
+	ScrollView mainScrolView;
+
+	private GoogleMap mMap;
+
+	private List<Marker> listmarker;
+
 	private Button btnServiceMore;
 
 	private RelativeLayout layout_district;
+	private RelativeLayout layout_map;
 
 	StadiumDetailModel dataPost;
 
 	private CustomProgressDialog dialog;
+	private Ultilities utils = new Ultilities();
 
+	private Uri imageUri;
+	private String fileName = "";
+	
+	StadiumDetailModel getData;
+	
 	public void initComponent() {
 
 		txtName = (EditText) findViewById(R.id.txt_name);
@@ -61,18 +121,32 @@ public class ScreenEditStadium extends Activity {
 		txtNumberStadium5 = (EditText) findViewById(R.id.txt_stadium_five);
 		txtNumberStadium7 = (EditText) findViewById(R.id.txt_stadium_seven);
 		txtDescription = (EditText) findViewById(R.id.txt_description);
+		edtFivePriceMorning = (EditText) findViewById(R.id.edt_five_morning);
+		edtFivePriceAfternoon = (EditText) findViewById(R.id.edt_five_afternoon);
+		edtFivePriceEvening = (EditText) findViewById(R.id.edt_five_evening);
+		edtSevenPriceMorning = (EditText) findViewById(R.id.edt_seven_morning);
+		edtSevenPriceAfternoon = (EditText) findViewById(R.id.edt_seven_afternoon);
+		edtSevenPriceEvening = (EditText) findViewById(R.id.edt_seven_evening);
 
 		txtDistrict = (TextView) findViewById(R.id.txt_district);
 		txtTitle = (TextView) findViewById(R.id.txt_title);
 
+		imgLogo = (ImageView) findViewById(R.id.imageLogo);
+
 		layout_district = (RelativeLayout) findViewById(R.id.layout_district);
+		layout_map = (RelativeLayout) findViewById(R.id.ll_mapview);
 
 		btnBack = (LinearLayout) findViewById(R.id.layout_button_left);
 		btnEdit = (LinearLayout) findViewById(R.id.layout_button_right);
+		mainScrolView = (ScrollView) findViewById(R.id.main_layout);
+
 		btnServiceMore = (Button) findViewById(R.id.btn_other_service);
 
+		listmarker = new ArrayList<Marker>();
+
 		dialog = new CustomProgressDialog(ScreenEditStadium.this);
-		txtTitle.setText("New Stadium ");
+		txtTitle.setText("Thay đổi thông tin");
+		Global.lat = ""; Global.lng = "";
 	}
 
 	public void initListener() {
@@ -82,9 +156,16 @@ public class ScreenEditStadium extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				finish();
-				overridePendingTransition(R.anim.slide_right,
-						R.anim.slide_left_leave);
+				if (mainScrolView.getVisibility() == View.GONE) {
+					mainScrolView.setVisibility(View.VISIBLE);
+					btnEdit.setVisibility(View.VISIBLE);
+					layout_map.setVisibility(View.GONE);
+				} else {
+					finish();
+					overridePendingTransition(R.anim.slide_right,
+							R.anim.slide_left_leave);
+				}
+
 			}
 		});
 		btnServiceMore.setOnClickListener(new OnClickListener() {
@@ -92,8 +173,9 @@ public class ScreenEditStadium extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(ScreenEditStadium.this, "Coming Soon!",
-						Toast.LENGTH_SHORT).show();
+				mainScrolView.setVisibility(View.GONE);
+				btnEdit.setVisibility(View.GONE);
+				layout_map.setVisibility(View.VISIBLE);
 			}
 		});
 		layout_district.setOnClickListener(new OnClickListener() {
@@ -104,6 +186,92 @@ public class ScreenEditStadium extends Activity {
 				CustomListViewDialog dialog = new CustomListViewDialog(
 						ScreenEditStadium.this, txtDistrict, app);
 				dialog.show();
+			}
+		});
+		imgLogo.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				final Dialog mDialog = new Dialog(ScreenEditStadium.this,
+						android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+				mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				mDialog.setContentView(R.layout.dialog_option_select_media);
+				mDialog.setCancelable(true);
+
+				final LinearLayout layout_main = (LinearLayout) mDialog
+						.findViewById(R.id.layout_main);
+				Button btn_take_photo = (Button) mDialog
+						.findViewById(R.id.btn_take_photo);
+				Button btn_from_gallery = (Button) mDialog
+						.findViewById(R.id.btn_from_gallery);
+
+				Button btn_cancel = (Button) mDialog
+						.findViewById(R.id.btn_cancel);
+				mDialog.show();
+
+				final Animation animation2 = AnimationUtils.loadAnimation(
+						getApplicationContext(), R.anim.slide_bottom_to_top);
+				layout_main.startAnimation(animation2);
+				Handler handle2 = new Handler();
+				handle2.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						try {
+
+						} catch (Exception ex) {
+						}
+						animation2.cancel();
+					}
+				}, 1020);
+
+				btn_take_photo.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						capturePhoto();
+						mDialog.cancel();
+					}
+				});
+				btn_from_gallery.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intentTakePhoto = new Intent(
+								ScreenEditStadium.this,
+								SelectFileDialog.class);
+
+						intentTakePhoto.putExtra("type", "photo");
+						startActivityForResult(intentTakePhoto, CHOOSE_MEDIA);
+						overridePendingTransition(R.anim.slide_left,
+								R.anim.slide_right_leave);
+						mDialog.cancel();
+					}
+				});
+
+				btn_cancel.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						final Animation animation2 = AnimationUtils
+								.loadAnimation(getApplicationContext(),
+										R.anim.slide_top_to_bottom);
+						layout_main.startAnimation(animation2);
+						Handler handle2 = new Handler();
+						handle2.postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								try {
+
+								} catch (Exception ex) {
+								}
+								animation2.cancel();
+							}
+						}, 1020);
+						mDialog.cancel();
+					}
+				});
 			}
 		});
 		btnEdit.setOnClickListener(new OnClickListener() {
@@ -140,7 +308,18 @@ public class ScreenEditStadium extends Activity {
 					field.setSeven_people(txtNumberStadium7.getText()
 							.toString());
 					dataPost.setField(field);
+					PriceModel price = new PriceModel();
+					price.setPriceMorning(edtFivePriceMorning.getText().toString().trim());
+					price.setPriceAfternoon(edtFivePriceAfternoon.getText().toString().trim());
+					price.setPriceEvening(edtFivePriceEvening.getText().toString().trim());
+					dataPost.setPrice5(price);
+					price = new PriceModel();
+					price.setPriceMorning(edtSevenPriceMorning.getText().toString().trim());
+					price.setPriceAfternoon(edtSevenPriceAfternoon.getText().toString().trim());
+					price.setPriceEvening(edtSevenPriceEvening.getText().toString().trim());
+					dataPost.setPrice7(price);
 					dataPost.setOwnerId(app.getToken_api());
+					dataPost.setMap(new Map(Global.lat, Global.lng));
 					AddDataToServer postToWS = new AddDataToServer();
 					postToWS.execute("");
 				}
@@ -151,20 +330,41 @@ public class ScreenEditStadium extends Activity {
 	}
 
 	public void initData() {
-		StadiumDetailModel getData = app.getStadiumDetails();
+		getData = app.getStadiumDetails();
 		txtName.setText(getData.getName());
 		txtAddress.setText(getData.getAddress());
 		txtDistrict.setText(getData.getDistrict().getName());
 		txtEmail.setText(getData.getEmail());
 		txtPhone.setText(getData.getPhone());
-		txtNumberStadium5.setText(getData.getField().getFive_people()
-				+ " Sân (Loại Sân 5 Người)");
-		txtNumberStadium7.setText(getData.getField().getSeven_people()
-				+ " Sân (Loại Sân 7 Người)");
+		txtNumberStadium5.setText(getData.getField().getFive_people());
+		txtNumberStadium7.setText(getData.getField().getSeven_people());
+		edtFivePriceMorning.setText(getData.getPrice5().getPriceMorning());
+		edtFivePriceAfternoon.setText(getData.getPrice5().getPriceAfternoon());
+		edtFivePriceEvening.setText(getData.getPrice5().getPriceEvening());
+		edtSevenPriceMorning.setText(getData.getPrice7().getPriceMorning());
+		edtSevenPriceAfternoon.setText(getData.getPrice7().getPriceAfternoon());
+		edtSevenPriceEvening.setText(getData.getPrice7().getPriceEvening());
 		txtDescription.setText(getData.getDescription());
 		if (getData.getOwnerId().equals(app.getToken_api())) {
 			btnEdit.setVisibility(View.VISIBLE);
 		}
+		if (getData.getMap() != null){
+			if (getData.getMap().getLat() !=null){
+				if (!getData.getMap().getLat().equals("")){
+					listmarker.clear();
+					mMap.clear();
+					Global.lat = getData.getMap().getLat(); Global.lng = getData.getMap().getLng();
+					LatLng p = new LatLng(Long.parseLong(getData.getMap().getLat()),Long.parseLong(getData.getMap().getLng()));
+					Marker marker = mMap.addMarker(new MarkerOptions().position(p)
+							.icon(BitmapDescriptorFactory
+									.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+					listmarker.add(marker);
+					mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 20));
+				}
+			}
+
+		}
+		
 	}
 
 	@Override
@@ -191,10 +391,10 @@ public class ScreenEditStadium extends Activity {
 			try {
 				String url = app.getLoginServer()
 						+ getResources()
-								.getString(R.string.Server_Get_All_Data);
-				Log.d("Url login", url);
+								.getString(R.string.Server_Get_All_Data) + "/" + app.getStadiumDetails().getIdToken();
+				Log.d("Url edit", url);
 				Services serviceLoad = new Services();
-				result = serviceLoad.addNewStadium(ScreenEditStadium.this, url,
+				result = serviceLoad.EditStadium(ScreenEditStadium.this, url,
 						dataPost);
 			} catch (NotFoundException e) {
 				// TODO Auto-generated catch block
@@ -238,6 +438,159 @@ public class ScreenEditStadium extends Activity {
 			}
 			dialog.dismiss();
 		}
+	}
+	
+	private void setUpMapIfNeeded() {
+		if (mMap == null) {
+			mMap = ((SupportMapFragment) getSupportFragmentManager()
+					.findFragmentById(R.id.map)).getMap();
+			if (mMap != null) {
+				setUpMap();
+			}
+		}
+	}
+
+	private void setUpMap() {
+		mMap.setOnMapClickListener(this);
+		mMap.setOnMapLongClickListener(this);
+		mMap.setOnCameraChangeListener(this);
+	}
+
+	@Override
+	public void onMapClick(LatLng p) {
+		// mTapTextView.setText("tapped, point=" + point);
+		listmarker.clear();
+		mMap.clear();
+		try {
+			Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+
+			List<Address> addresses = geoCoder.getFromLocation(p.latitude,
+					p.longitude, 1);
+			Log.d("lat neeeeeee", "" + p.latitude);
+			Log.d("lng neeeeeee", "" + p.longitude);
+			Global.lat = String.valueOf(p.latitude);
+			Global.lng = String.valueOf(p.longitude);
+
+			String add = "";
+			if (addresses.size() > 0) {
+
+				for (int i = 0; i < addresses.get(0).getMaxAddressLineIndex(); i++)
+
+					add += addresses.get(0).getAddressLine(i) + " ";
+				Toast.makeText(ScreenEditStadium.this, add,
+						Toast.LENGTH_SHORT).show();
+			}
+			Marker marker = mMap.addMarker(new MarkerOptions().position(p)
+					.icon(BitmapDescriptorFactory
+							.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+			listmarker.add(marker);
+			if (add.contains(",")) {
+				String[] state = add.split(",");
+				String getState = state[1];
+				String getAdd = state[0];
+
+				getState = getState.trim();
+				if (getState.contains(" ")) {
+					String[] getZip = getState.split(" ");
+					Global.zipcode = getZip[1];
+					Global.state = getZip[0];
+				}
+				getAdd = getAdd.trim();
+				if (getAdd.contains(" ")) {
+					String[] getAddress = getAdd.split(" ");
+					int lenghtOfArray = getAddress.length;
+					String city = getAddress[lenghtOfArray - 1];
+					String address = "";
+					if (lenghtOfArray > 1) {
+						for (int i = 0; i < (lenghtOfArray - 1); i++) {
+							address += getAddress[i] + " ";
+						}
+					}
+
+					Global.city = city;
+					Global.street = address;
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void onMapLongClick(LatLng point) {
+		// mTapTextView.setText("long pressed, point=" + point);
+	}
+
+	@Override
+	public void onCameraChange(final CameraPosition position) {
+		// mCameraTextView.setText(position.toString());
+	}
+
+	public void capturePhoto() {
+		fileName = "msa_img";
+		String value = utils.GetCurrentTime();
+		fileName += "_" + value + ".jpg";
+		File file = new File(Environment.getExternalStorageDirectory()
+				.getPath(), fileName);
+		imageUri = Uri.fromFile(file);
+		Intent intent = new Intent(
+				android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+		startActivityForResult(intent, TAKE_IMAGE);
+
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == TAKE_IMAGE) {
+			if (resultCode == RESULT_OK) {
+
+				File f = new File(Environment.getExternalStorageDirectory()
+						.getPath() + "/" + fileName);
+				if (f.exists()) {
+					Log.d("file", fileName);
+					app.setLinks(Environment.getExternalStorageDirectory()
+							.getPath() + "/" + fileName);
+					Bitmap bitmap = utils.decodeFile(Environment
+							.getExternalStorageDirectory().getPath()
+							+ "/"
+							+ fileName);
+					imgLogo.setImageBitmap(bitmap);
+				} else {
+					Toast.makeText(getApplicationContext(),
+							"Failed to take the photo. Please try again",
+							Toast.LENGTH_LONG).show();
+				}
+			}
+		}
+		if ((requestCode == CHOOSE_MEDIA) && (resultCode == RESULT_OK)) {
+
+			if (!app.getLinks().equals("")) {
+				if (app.getLinks().contains("/")) {
+					String[] listTypeImage = getResources().getStringArray(
+							R.array.image);
+					String[] nameFile = app.getLinks().split("/");
+					String filDescription = nameFile[nameFile.length - 1];
+					for (int i = 0; i < listTypeImage.length; i++) {
+						if (filDescription.contains("." + listTypeImage[i])) {
+							Bitmap bitmap = utils.decodeFile(app.getLinks());
+							imgLogo.setImageBitmap(bitmap);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setUpMapIfNeeded();
 	}
 
 }

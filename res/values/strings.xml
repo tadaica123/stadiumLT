@@ -89,6 +89,9 @@
 	<string name="back">Trở ra</string>
 	<string name="select">Done</string>
 	
+	<!-- Ta =============activity_shot_detail_stadium.xml========================================== -->
+	<string name="edit">Chỉnh Sửa </string>
+	<string name="delete">Xoá </string>
 	
     <string-array name="image">
         <item>png</item>

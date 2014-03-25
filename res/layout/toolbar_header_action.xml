@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:background="@null"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/layout_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:visibility="visible"
+            android:background="@drawable/bg_list_style_2" >
+
+            <TextView
+                android:id="@+id/tabTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/gray_text"
+                android:text="@string/edit"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/tabImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_above="@id/tabTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/edit_36x36"
+                android:contentDescription="@string/img_des" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="#C0C0C0"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_delete"
+            android:layout_width="fill_parent"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_list_style_2" >
+
+            <TextView
+                android:id="@+id/tabTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:text="@string/delete"
+                android:textColor="@color/gray_text"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/tabImage2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_above="@id/tabTitle2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/delete_48x48"
+                android:contentDescription="@string/img_des" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

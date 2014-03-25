@@ -15,6 +15,17 @@
 
         <include layout="@layout/header_bar_2" />
     </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/layout_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <include layout="@layout/toolbar_header_action" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"

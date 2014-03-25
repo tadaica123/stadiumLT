@@ -3,6 +3,7 @@
 
     <color name="gray">#888888</color>
     <color name="gray_2">#5e5e5e</color>
+    <color name="gray_text">#5e5e5e</color>
     <color name="green_fly">#3498DB</color>
     <color name="green_fly_hv">#2980B9</color>
     <color name="green1">#006400</color>
